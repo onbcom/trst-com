@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About TRST.com | Our Mission"
+  description="TRST.com is the definitive authority on the invisible infrastructure of the digital economy. Our mission: map the technologies and protocols making modern trust possible."
+>
+  <!-- Hero -->
+  <section class="border-b border-border py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">About</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-6">
+          Defining the<br />
+          <span class="text-gradient">Trust Economy</span>
+        </h1>
+        <p class="text-lg text-ghost/70 leading-relaxed">
+          TRST.com is the definitive authority on the invisible infrastructure of the digital economy.
+          We map the technologies, frameworks, and protocols that make modern commerce, identity, and
+          AI interaction possible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div>
+        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+        <div class="space-y-4 text-ghost/70 leading-relaxed">
+          <p>
+            In 2026, the digital economy operates on the premise of trust. Every transaction, every login,
+            every AI interaction rests on a foundation of protocols and systems most people never see.
+          </p>
+          <p>
+            TRST was created to make that invisible infrastructure visible. We believe that the architects
+            of the next digital era—developers, security professionals, product leaders, and policymakers—need
+            a comprehensive, technically rigorous reference for the trust layer.
+          </p>
+          <p>
+            We provide independent analysis of the technologies, vendors, and standards shaping how
+            humans and machines establish, verify, and maintain trust in digital environments.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        {[
+          {
+            title: 'Technological Analysis',
+            desc: 'We assess platforms based on cryptographic security, user privacy, scalability, and interoperability.',
+            icon: '🔬',
+          },
+          {
+            title: 'Independent Perspective',
+            desc: 'No vendor relationships influence our Trust Scores. Our ratings are based on public technical analysis.',
+            icon: '⚖️',
+          },
+          {
+            title: 'Forward-Looking',
+            desc: 'We focus on the 2026 and beyond trust stack—including AI agent identity, ZK proofs, and self-sovereign systems.',
+            icon: '🔭',
+          },
+          {
+            title: 'Developer-First',
+            desc: 'Our content is designed for the engineers and architects building the next generation of trust infrastructure.',
+            icon: '💻',
+          },
+        ].map(item => (
+          <div class="card p-5 flex gap-4">
+            <span class="text-2xl shrink-0">{item.icon}</span>
+            <div>
+              <h3 class="font-semibold text-ghost mb-1">{item.title}</h3>
+              <p class="text-sm text-muted leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem We Solve -->
+  <section class="border-t border-border bg-slate/20 py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3 text-center">The Problem</p>
+      <h2 class="text-3xl font-bold mb-8 text-center">Why TRST Exists</h2>
+      <div class="space-y-6 text-ghost/70 leading-relaxed">
+        <p>
+          The explosion of generative AI in 2025–2026 introduced a fundamental crisis of trust. When
+          synthetic media is indistinguishable from authentic content, when AI agents can impersonate
+          humans at scale, and when the "cost of deception" approaches zero—the systems that verify
+          what is real become critical infrastructure.
+        </p>
+        <p>
+          Yet the trust infrastructure landscape is fragmented, rapidly evolving, and poorly documented
+          for the practitioners who need to build with it. TRST fills that gap: a single authoritative
+          reference for the technologies that answer the question "can we trust this?"
+        </p>
+        <p class="font-mono text-sm text-ghost border border-border rounded-lg p-4 bg-midnight">
+          "Security is about keeping people out. Trust is about letting the right people in."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-border">
+    <h2 class="text-3xl font-bold mb-10 text-center">Our Principles</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[
+        { num: '01', title: 'Cryptography First', desc: 'Trust must be mathematically provable, not merely assumed.' },
+        { num: '02', title: 'Privacy by Design', desc: 'Verification should reveal minimum necessary information.' },
+        { num: '03', title: 'Decentralization', desc: 'Trust systems with single points of failure are not trustworthy.' },
+        { num: '04', title: 'Open Standards', desc: 'Interoperable standards prevent lock-in and enable ecosystem trust.' },
+        { num: '05', title: 'Human Sovereignty', desc: 'Individuals must retain control over their digital identity.' },
+        { num: '06', title: 'AI Accountability', desc: 'Autonomous agents must be as accountable as human actors.' },
+      ].map(p => (
+        <div class="card p-6">
+          <div class="font-mono text-xs text-mint mb-3">{p.num}</div>
+          <h3 class="font-semibold text-ghost mb-2">{p.title}</h3>
+          <p class="text-sm text-muted leading-relaxed">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="border-t border-border py-12 bg-slate/20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs text-muted leading-relaxed">
+        <strong class="text-ghost/50">Disclaimer:</strong> TRST.com provides technological analysis and is not a legal or security auditing firm.
+        Trust Scores are based on publicly available technical analysis and do not constitute endorsements.
+        This site complies with GDPR-v3 and CCPA-2026 data handling standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 border-t border-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-6">Start Exploring</h2>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/infrastructure" class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors">
+          View the Trust Map
+        </a>
+        <a href="/newsletter" class="px-6 py-3 border border-border text-ghost/80 font-semibold rounded-lg hover:border-mint hover:text-mint transition-colors">
+          Subscribe to The Trust Signal
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

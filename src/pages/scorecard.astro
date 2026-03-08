@@ -1,0 +1,365 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Digital Trust Scorecard | TRST.com"
+  description="Evaluate your organization's Trust Maturity with the Digital Trust Scorecard. Get a score, category grades, and specific recommendations to improve your trust infrastructure."
+>
+  <!-- Header -->
+  <section class="border-b border-border py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">Interactive Tool</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Digital Trust Scorecard</h1>
+      <p class="text-ghost/70 max-w-2xl mx-auto text-lg">
+        Evaluate your organization's Trust Maturity in under 2 minutes. Get a score, category grades,
+        and specific recommendations calibrated to your sector and architecture.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tool -->
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Step 1: Intro -->
+    <div id="step-intro" class="tool-step">
+      <div class="card p-8 text-center">
+        <div class="text-5xl mb-6">🛡️</div>
+        <h2 class="text-2xl font-bold mb-4">What is Trust Maturity?</h2>
+        <p class="text-ghost/70 leading-relaxed mb-6">
+          Trust Maturity measures how well your organization has implemented the protocols, architectures,
+          and practices that allow your users, partners, and systems to interact with confidence.
+        </p>
+        <p class="text-ghost/70 leading-relaxed mb-8">
+          This assessment covers 5 dimensions: Sector Context, Identity Strategy, Authentication Method,
+          Data Control, and AI Transparency.
+        </p>
+        <div class="flex flex-wrap gap-3 justify-center mb-8">
+          {['~2 min', '5 questions', 'Free'].map(tag => (
+            <span class="px-3 py-1.5 text-xs font-mono bg-mint/10 text-mint border border-mint/20 rounded">{tag}</span>
+          ))}
+        </div>
+        <button
+          id="start-btn"
+          class="px-8 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors text-lg"
+        >
+          Begin Assessment →
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Questions -->
+    <div id="step-questions" class="tool-step hidden">
+      <!-- Progress bar -->
+      <div class="mb-8">
+        <div class="flex justify-between text-xs text-muted font-mono mb-2">
+          <span id="step-label">Question 1 of 5</span>
+          <span id="step-pct">0%</span>
+        </div>
+        <div class="score-bar">
+          <div id="progress-fill" class="score-bar-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Question card -->
+      <div class="card p-8" id="question-card">
+        <p class="font-mono text-xs text-mint mb-2" id="q-category">SECTOR</p>
+        <h2 class="text-xl font-bold text-ghost mb-6" id="q-text">Loading...</h2>
+        <div class="space-y-3" id="q-options"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Processing -->
+    <div id="step-processing" class="tool-step hidden">
+      <div class="card p-12 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-mint/30 mb-6" id="spin-ring">
+          <div class="w-8 h-8 rounded-full border-2 border-t-mint border-r-mint border-b-transparent border-l-transparent animate-spin"></div>
+        </div>
+        <h2 class="text-xl font-bold text-ghost mb-3">Calculating Trust Integrity...</h2>
+        <p class="text-muted text-sm" id="processing-msg">Analyzing identity strategy...</p>
+      </div>
+    </div>
+
+    <!-- Step 4: Results -->
+    <div id="step-results" class="tool-step hidden space-y-6">
+      <!-- Overall score -->
+      <div class="card p-8 text-center border-mint/20 bg-mint/5">
+        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-4">Trust Maturity Score</p>
+        <div class="font-mono text-8xl font-extrabold text-mint mb-2" id="result-score">--</div>
+        <div class="text-muted text-sm mb-4">out of 100</div>
+        <div class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold" id="result-grade-badge">--</div>
+      </div>
+
+      <!-- Category grades -->
+      <div class="card p-6">
+        <h3 class="font-semibold text-ghost mb-5">Category Breakdown</h3>
+        <div class="space-y-4" id="result-categories"></div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="card p-6">
+        <h3 class="font-semibold text-ghost mb-5">Recommendations</h3>
+        <div class="space-y-4" id="result-recommendations"></div>
+      </div>
+
+      <!-- Post-result CTAs -->
+      <div class="grid sm:grid-cols-2 gap-4">
+        <a
+          href="/newsletter"
+          class="card p-5 hover:border-mint/40 transition-all text-center group"
+        >
+          <div class="text-2xl mb-2">📬</div>
+          <div class="font-semibold text-ghost group-hover:text-mint transition-colors text-sm">Download the 2026 Trust Framework</div>
+          <div class="text-xs text-muted mt-1">via The Trust Signal newsletter</div>
+        </a>
+        <a
+          href="/infrastructure"
+          class="card p-5 hover:border-mint/40 transition-all text-center group"
+        >
+          <div class="text-2xl mb-2">🗺️</div>
+          <div class="font-semibold text-ghost group-hover:text-mint transition-colors text-sm">Explore Trust Infrastructure</div>
+          <div class="text-xs text-muted mt-1">Find providers that address your gaps</div>
+        </a>
+      </div>
+
+      <!-- Restart -->
+      <div class="text-center">
+        <button id="restart-btn" class="text-sm text-muted hover:text-mint transition-colors">
+          ← Retake the assessment
+        </button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Questions data
+  const questions = [
+    {
+      id: 'sector',
+      category: 'SECTOR',
+      text: 'What best describes your organization\'s primary sector?',
+      options: [
+        { label: 'SaaS / Software', value: 'saas', weight: 0 },
+        { label: 'FinTech / Financial Services', value: 'fintech', weight: 5 },
+        { label: 'Healthcare', value: 'healthcare', weight: 5 },
+        { label: 'AI Agent Platform', value: 'ai', weight: 8 },
+      ],
+    },
+    {
+      id: 'identity',
+      category: 'IDENTITY STRATEGY',
+      text: 'Which best describes your identity strategy?',
+      options: [
+        { label: 'Centralized (proprietary user database)', value: 'centralized', weight: 5 },
+        { label: 'Federated (SSO / SAML / OIDC)', value: 'federated', weight: 15 },
+        { label: 'Self-Sovereign (DID / Verifiable Credentials)', value: 'ssi', weight: 25 },
+        { label: 'No formal strategy', value: 'none', weight: 0 },
+      ],
+    },
+    {
+      id: 'auth',
+      category: 'AUTHENTICATION',
+      text: 'What is your primary authentication method?',
+      options: [
+        { label: 'Passwords only', value: 'passwords', weight: 0 },
+        { label: 'MFA (TOTP / SMS)', value: 'mfa', weight: 15 },
+        { label: 'Passkeys (WebAuthn / FIDO2)', value: 'passkeys', weight: 25 },
+        { label: 'Biometrics (facial / fingerprint)', value: 'biometrics', weight: 20 },
+      ],
+    },
+    {
+      id: 'data',
+      category: 'DATA CONTROL',
+      text: 'Do your users own and control their data?',
+      options: [
+        { label: 'Yes — full data portability and deletion', value: 'yes', weight: 20 },
+        { label: 'Partially — some controls available', value: 'partial', weight: 10 },
+        { label: 'No — we control user data', value: 'no', weight: 0 },
+        { label: 'Not applicable', value: 'na', weight: 5 },
+      ],
+    },
+    {
+      id: 'ai',
+      category: 'AI TRANSPARENCY',
+      text: 'Are AI interactions explicitly labeled in your product?',
+      options: [
+        { label: 'Yes — all AI content is clearly labeled', value: 'yes', weight: 15 },
+        { label: 'Partially — in some areas', value: 'partial', weight: 8 },
+        { label: 'No — AI interactions are unlabeled', value: 'no', weight: 0 },
+        { label: 'We don\'t use AI in our product', value: 'na', weight: 10 },
+      ],
+    },
+  ];
+
+  const recommendations: Record<string, Record<string, string>> = {
+    identity: {
+      centralized: 'Migrate your identity layer to a federated SSO solution (OIDC/SAML) to eliminate credential silos and enable easier compliance.',
+      federated: 'Evaluate a phased transition to Verifiable Credentials (W3C VC) to give users portable, self-sovereign identity.',
+      ssi: 'Excellent foundation. Ensure your VC implementation supports selective disclosure (SD-JWT or BBS+) for privacy-preserving verification.',
+      none: 'Implement a formal identity strategy immediately. Start with a managed identity provider (Okta, Auth0, or Entra ID) to establish a secure foundation.',
+    },
+    auth: {
+      passwords: 'Migrate to Passkeys (WebAuthn/FIDO2) immediately to eliminate credential stuffing attacks. Password-only auth is a critical vulnerability in 2026.',
+      mfa: 'Upgrade from TOTP/SMS MFA to Passkeys—they\'re phishing-resistant and frictionless. TOTP is vulnerable to real-time phishing attacks.',
+      passkeys: 'Strong auth foundation. Consider adding risk-based step-up authentication for high-value actions and continuous behavioral signals.',
+      biometrics: 'Strong. Ensure your biometric provider has anti-spoofing (Genuine Presence Assurance) and complies with GDPR-v3 biometric data requirements.',
+    },
+    data: {
+      no: 'Implement a data ownership and portability framework. GDPR-v3 and CCPA-2026 impose significant liability for organizations that fail to provide user data rights.',
+      partial: 'Expand data controls to full portability. Consider a user data vault architecture that gives users granular control over what they share.',
+      yes: 'Excellent. Consider implementing selective disclosure credentials so users can prove data attributes without sharing the underlying data.',
+      na: 'Even if you don\'t handle personal data, establish a data governance policy to future-proof compliance as regulations expand.',
+    },
+    ai: {
+      no: 'Implement AI labeling across all user-facing AI interactions. This is increasingly a regulatory requirement and is essential for maintaining user trust.',
+      partial: 'Expand AI labeling to all interactions. Users deserve to know when they\'re interacting with AI—this is both an ethical imperative and a growing legal requirement.',
+      yes: 'Strong AI transparency. Consider publishing an AI use policy and implementing model cards to explain what AI systems operate in your platform.',
+      na: 'Even without current AI use, establish an AI governance policy for when you adopt AI features. Proactive policy is easier than reactive compliance.',
+    },
+  };
+
+  // State
+  let currentStep = 0;
+  let answers: Record<string, { value: string; weight: number }> = {};
+
+  // Elements
+  const stepIntro = document.getElementById('step-intro')!;
+  const stepQuestions = document.getElementById('step-questions')!;
+  const stepProcessing = document.getElementById('step-processing')!;
+  const stepResults = document.getElementById('step-results')!;
+
+  function showStep(step: 'intro' | 'questions' | 'processing' | 'results') {
+    [stepIntro, stepQuestions, stepProcessing, stepResults].forEach(el => el.classList.add('hidden'));
+    const map = { intro: stepIntro, questions: stepQuestions, processing: stepProcessing, results: stepResults };
+    map[step].classList.remove('hidden');
+  }
+
+  function renderQuestion(index: number) {
+    const q = questions[index];
+    const pct = Math.round((index / questions.length) * 100);
+
+    document.getElementById('step-label')!.textContent = `Question ${index + 1} of ${questions.length}`;
+    document.getElementById('step-pct')!.textContent = `${pct}%`;
+    (document.getElementById('progress-fill') as HTMLElement).style.width = `${pct}%`;
+
+    document.getElementById('q-category')!.textContent = q.category;
+    document.getElementById('q-text')!.textContent = q.text;
+
+    const optionsEl = document.getElementById('q-options')!;
+    optionsEl.innerHTML = '';
+
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'w-full text-left p-4 rounded-lg border border-border text-ghost/80 hover:border-mint hover:text-mint hover:bg-mint/5 transition-all text-sm';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => {
+        answers[q.id] = { value: opt.value, weight: opt.weight };
+        if (index < questions.length - 1) {
+          renderQuestion(index + 1);
+        } else {
+          processResults();
+        }
+      });
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function processResults() {
+    showStep('processing');
+    const msgs = [
+      'Analyzing identity strategy...',
+      'Evaluating authentication posture...',
+      'Assessing data governance...',
+      'Calibrating AI transparency score...',
+      'Generating recommendations...',
+    ];
+    let i = 0;
+    const msgEl = document.getElementById('processing-msg')!;
+    const interval = setInterval(() => {
+      msgEl.textContent = msgs[i % msgs.length];
+      i++;
+      if (i >= msgs.length) {
+        clearInterval(interval);
+        setTimeout(showResults, 800);
+      }
+    }, 500);
+  }
+
+  function showResults() {
+    const totalWeight = Object.values(answers).reduce((sum, a) => sum + a.weight, 0);
+    const maxWeight = 73; // max possible: 8+25+25+20+15 = 93, normalized to 100
+    const rawScore = Math.round((totalWeight / maxWeight) * 100);
+    const score = Math.min(100, rawScore + 15); // apply a floor boost
+
+    const privacyScore = Math.min(100, (answers.data?.weight ?? 0) * 4 + (answers.ai?.weight ?? 0) * 3 + 20);
+    const securityScore = Math.min(100, (answers.auth?.weight ?? 0) * 3 + (answers.identity?.weight ?? 0) * 2 + 15);
+    const transparencyScore = Math.min(100, (answers.ai?.weight ?? 0) * 5 + (answers.data?.weight ?? 0) * 2 + 20);
+
+    const gradeInfo = (s: number) => {
+      if (s >= 85) return { letter: 'A', color: 'text-mint', bg: 'bg-mint/10 text-mint border-mint/30' };
+      if (s >= 70) return { letter: 'B', color: 'text-ghost', bg: 'bg-ghost/10 text-ghost border-border' };
+      if (s >= 55) return { letter: 'C', color: 'text-yellow-400', bg: 'bg-yellow-400/10 text-yellow-400 border-yellow-400/30' };
+      return { letter: 'D', color: 'text-red-400', bg: 'bg-red-400/10 text-red-400 border-red-400/30' };
+    };
+
+    // Render score
+    document.getElementById('result-score')!.textContent = String(score);
+    const { letter, bg } = gradeInfo(score);
+    const gradeBadge = document.getElementById('result-grade-badge')!;
+    gradeBadge.textContent = `Grade: ${letter}`;
+    gradeBadge.className = `inline-block px-4 py-1.5 rounded-full text-sm font-semibold border ${bg}`;
+
+    // Category breakdown
+    const cats = [
+      { name: 'Privacy', score: privacyScore },
+      { name: 'Security', score: securityScore },
+      { name: 'Transparency', score: transparencyScore },
+    ];
+    const catsEl = document.getElementById('result-categories')!;
+    catsEl.innerHTML = cats.map(cat => {
+      const info = gradeInfo(cat.score);
+      return `
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-ghost">${cat.name}</span>
+            <span class="font-mono ${info.color}">${cat.score} — ${info.letter}</span>
+          </div>
+          <div class="score-bar">
+            <div class="score-bar-fill" style="width: ${cat.score}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Recommendations
+    const recs: string[] = [];
+    if (answers.identity) recs.push(recommendations.identity[answers.identity.value] ?? '');
+    if (answers.auth) recs.push(recommendations.auth[answers.auth.value] ?? '');
+    if (answers.data) recs.push(recommendations.data[answers.data.value] ?? '');
+    if (answers.ai) recs.push(recommendations.ai[answers.ai.value] ?? '');
+
+    const topRecs = recs.filter(Boolean).slice(0, 3);
+    const recsEl = document.getElementById('result-recommendations')!;
+    recsEl.innerHTML = topRecs.map((rec, i) => `
+      <div class="flex gap-3 p-4 rounded-lg bg-slate/40 border border-border">
+        <span class="font-mono text-xs text-mint shrink-0 mt-0.5">0${i + 1}</span>
+        <p class="text-sm text-ghost/70 leading-relaxed">${rec}</p>
+      </div>
+    `).join('');
+
+    showStep('results');
+  }
+
+  // Event listeners
+  document.getElementById('start-btn')?.addEventListener('click', () => {
+    currentStep = 0;
+    showStep('questions');
+    renderQuestion(0);
+  });
+
+  document.getElementById('restart-btn')?.addEventListener('click', () => {
+    answers = {};
+    currentStep = 0;
+    showStep('intro');
+  });
+</script>

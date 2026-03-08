@@ -1,17 +1,245 @@
 ---
-
+import BaseLayout from '../components/BaseLayout.astro';
+import { categories, providers } from '../data/providers';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="TRST.com | The Digital Trust Infrastructure Authority"
+  description="Exploring the systems that make trust possible: identity verification, reputation networks, and AI trust layers for the 2026 digital economy."
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden min-h-[80vh] flex items-center">
+    <!-- Background grid -->
+    <div class="absolute inset-0 opacity-5">
+      <div style="background-image: linear-gradient(#A2FFD6 1px, transparent 1px), linear-gradient(90deg, #A2FFD6 1px, transparent 1px); background-size: 40px 40px;" class="w-full h-full"></div>
+    </div>
+
+    <!-- Glow -->
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-10" style="background: radial-gradient(circle, #A2FFD6, transparent 70%);"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div class="max-w-4xl">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-border bg-slate/30">
+          <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+          <span class="font-mono text-xs text-mint">2026 Trust Infrastructure Report Available</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-none tracking-tight">
+          The Infrastructure<br />
+          <span class="text-gradient">of Confidence</span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-lg sm:text-xl text-ghost/70 max-w-2xl mb-10 leading-relaxed">
+          As the global economy transitions to AI-driven interactions, trust is the only currency that matters.
+          TRST defines the systems that verify identity, secure transactions, and scale reputation across the digital frontier.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/infrastructure"
+            class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors text-sm sm:text-base"
+          >
+            Explore the Trust Map →
+          </a>
+          <a
+            href="/scorecard"
+            class="px-6 py-3 border border-border text-ghost/80 font-semibold rounded-lg hover:border-mint hover:text-mint transition-colors text-sm sm:text-base"
+          >
+            Take the Scorecard
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {[
+          { value: '12+', label: 'Providers Mapped' },
+          { value: '5', label: 'Trust Categories' },
+          { value: '4', label: 'Stack Layers' },
+          { value: '2026', label: 'Standards' },
+        ].map(stat => (
+          <div class="card p-4">
+            <div class="font-mono text-2xl font-bold text-mint mb-1">{stat.value}</div>
+            <div class="text-xs text-muted">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What It Is -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-border">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">What Is Digital Trust</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">The vital utility of the 2026 internet</h2>
+        <p class="text-ghost/70 leading-relaxed mb-6">
+          Digital trust is no longer a luxury; it is the vital utility of the 2026 internet. TRST.com catalogs the evolving
+          landscape of trust layers—from decentralized identity (DID) and biometric authentication to AI-agent verification
+          and fraud prevention networks.
+        </p>
+        <p class="text-ghost/70 leading-relaxed">
+          We provide the blueprint for how humans and machines interact with certainty in an increasingly complex digital world.
+        </p>
+      </div>
+      <!-- Trust Stack Visual -->
+      <div class="space-y-3">
+        {[
+          { layer: '04', name: 'Enforcement', desc: 'Smart contracts & automated compliance', color: 'bg-mint/20 border-mint/30' },
+          { layer: '03', name: 'Reputation', desc: 'Aggregating signals to predict reliability', color: 'bg-ghost/5 border-border' },
+          { layer: '02', name: 'Authentication', desc: 'Continuous access rights validation', color: 'bg-ghost/5 border-border' },
+          { layer: '01', name: 'Verification', desc: 'Cryptographic & biometric proofs', color: 'bg-ghost/5 border-border' },
+        ].map(item => (
+          <div class={`flex items-center gap-4 p-4 rounded-lg border ${item.color}`}>
+            <span class="font-mono text-xs text-muted w-8 shrink-0">{item.layer}</span>
+            <div>
+              <div class="font-semibold text-sm text-ghost">{item.name}</div>
+              <div class="text-xs text-muted">{item.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="border-t border-border bg-slate/20 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">Key Benefits</p>
+        <h2 class="text-3xl sm:text-4xl font-bold">Why Trust Infrastructure Matters</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          {
+            icon: '🛡️',
+            title: 'Systemic Security',
+            desc: 'Move beyond perimeter defense to zero-trust architecture.',
+          },
+          {
+            icon: '⚡',
+            title: 'Operational Velocity',
+            desc: 'Reduce friction in onboarding and transactions by automating verification.',
+          },
+          {
+            icon: '🤖',
+            title: 'AI Readiness',
+            desc: 'Establish the protocols necessary for safe autonomous agent interactions.',
+          },
+          {
+            icon: '🔑',
+            title: 'User Agency',
+            desc: 'Empower individuals with self-sovereign identity and data control.',
+          },
+        ].map(benefit => (
+          <div class="card p-6">
+            <div class="text-3xl mb-4">{benefit.icon}</div>
+            <h3 class="font-semibold text-ghost mb-2">{benefit.title}</h3>
+            <p class="text-sm text-muted leading-relaxed">{benefit.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Infrastructure Categories -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-border">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">Trust Map Preview</p>
+        <h2 class="text-3xl font-bold">Infrastructure Categories</h2>
+      </div>
+      <a href="/infrastructure" class="text-sm text-mint hover:underline hidden sm:block">View All →</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {categories.map(cat => (
+        <a
+          href={`/infrastructure/${cat.slug}`}
+          class="card p-6 hover:border-mint/50 hover:bg-mint/5 transition-all group"
+        >
+          <div class="text-3xl mb-4">{cat.icon}</div>
+          <h3 class="font-semibold text-ghost group-hover:text-mint transition-colors mb-2">{cat.name}</h3>
+          <p class="text-xs text-muted leading-relaxed">{cat.description}</p>
+        </a>
+      ))}
+    </div>
+    <div class="mt-6 sm:hidden text-center">
+      <a href="/infrastructure" class="text-sm text-mint">View All Categories →</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-border bg-slate/20 py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">FAQ</p>
+        <h2 class="text-3xl font-bold">Common Questions</h2>
+      </div>
+      <div class="space-y-4">
+        {[
+          {
+            q: 'Why is digital trust more important in 2026?',
+            a: 'With the explosion of generative AI and autonomous agents, the "cost of deception" has dropped to near zero. Robust trust systems are the only way to distinguish between genuine entities and malicious synthetics.',
+          },
+          {
+            q: 'What is a "Trust Layer"?',
+            a: 'A trust layer is a software and protocol stack that sits between the network and application layers, specifically handling identity, permissioning, and integrity.',
+          },
+          {
+            q: 'How does TRST evaluate technologies?',
+            a: 'We assess platforms based on four pillars: cryptographic security, user privacy, scalability, and interoperability across different digital ecosystems.',
+          },
+          {
+            q: 'Is TRST a security platform?',
+            a: 'No. Security is about keeping people out; Trust is about letting the right people in and ensuring they can transact with confidence.',
+          },
+          {
+            q: 'What role does Decentralized Identity (DID) play?',
+            a: 'DID is the foundation of digital trust, removing the need for centralized silos and giving users a portable, verifiable digital "passport" they control.',
+          },
+        ].map((item, i) => (
+          <details class="card p-6 group">
+            <summary class="flex items-center justify-between cursor-pointer font-semibold text-ghost/90 list-none">
+              {item.q}
+              <span class="text-muted font-mono text-lg ml-4 shrink-0">+</span>
+            </summary>
+            <p class="mt-4 text-ghost/70 leading-relaxed text-sm">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Band -->
+  <section class="border-t border-border py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-mint/30 bg-mint/5">
+        <span class="w-2 h-2 rounded-full bg-mint"></span>
+        <span class="font-mono text-xs text-mint">2026 Trust Framework</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Architecting a Trustworthy Future</h2>
+      <p class="text-ghost/70 mb-10 text-lg">
+        Join the leaders defining the next era of digital infrastructure.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/newsletter"
+          class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors"
+        >
+          Get the 2026 Trust Report
+        </a>
+        <a
+          href="/scorecard"
+          class="px-6 py-3 border border-border text-ghost/80 font-semibold rounded-lg hover:border-mint hover:text-mint transition-colors"
+        >
+          Take the Trust Scorecard
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

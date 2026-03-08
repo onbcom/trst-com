@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="The Trust Signal Newsletter | TRST.com"
+  description="Subscribe to The Trust Signal—weekly digital trust intelligence covering identity protocols, infrastructure updates, and AI agent standards for practitioners."
+>
+  <!-- Hero -->
+  <section class="border-b border-border py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-mint/30 bg-mint/5">
+        <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+        <span class="font-mono text-xs text-mint">Weekly · Free · Unsubscribe anytime</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-6">
+        The Trust Signal
+      </h1>
+      <p class="text-lg text-ghost/70 max-w-2xl mx-auto mb-10">
+        Weekly digital trust intelligence. Protocol updates, infrastructure analysis,
+        and the emerging standards shaping identity, security, and AI accountability in 2026.
+      </p>
+
+      <!-- Signup Form -->
+      <div class="max-w-md mx-auto">
+        <form id="signup-form" class="flex gap-2">
+          <input
+            type="email"
+            id="email-input"
+            placeholder="you@yourcompany.com"
+            required
+            class="flex-1 px-4 py-3 bg-slate border border-border rounded-lg text-ghost placeholder-muted focus:outline-none focus:border-mint transition-colors text-sm"
+          />
+          <button
+            type="submit"
+            class="px-5 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors text-sm shrink-0"
+          >
+            Subscribe →
+          </button>
+        </form>
+        <p class="text-xs text-muted mt-3">
+          No spam. GDPR-v3 compliant. Unsubscribe in one click.
+        </p>
+        <!-- Success message -->
+        <div id="success-msg" class="hidden mt-4 p-4 rounded-lg border border-mint/30 bg-mint/10 text-mint text-sm">
+          ✓ You're subscribed. Welcome to The Trust Signal.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you'll get -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-12">
+      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">What You'll Receive</p>
+      <h2 class="text-3xl font-bold">Weekly Trust Intelligence</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[
+        {
+          icon: '📡',
+          title: 'Protocol Updates',
+          desc: 'Breaking developments in W3C DIDs, OIDC, FIDO2, and emerging standards before they reach the mainstream.',
+        },
+        {
+          icon: '🗺️',
+          title: 'Infrastructure Analysis',
+          desc: 'Deep dives on trust infrastructure providers—new entrants, funding rounds, and technology shifts.',
+        },
+        {
+          icon: '🤖',
+          title: 'AI Trust Frontier',
+          desc: 'The latest in AI agent identity, model accountability, and autonomous system governance.',
+        },
+        {
+          icon: '⚖️',
+          title: 'Regulatory Radar',
+          desc: 'GDPR-v3, CCPA-2026, and emerging AI regulation—translated from legalese to implementation guidance.',
+        },
+        {
+          icon: '🔑',
+          title: 'Developer Spotlight',
+          desc: 'Open-source tools, SDKs, and reference implementations worth adding to your trust stack.',
+        },
+        {
+          icon: '📊',
+          title: 'Trust Benchmark Data',
+          desc: 'Quarterly Trust Score updates and comparative analysis across infrastructure categories.',
+        },
+      ].map(item => (
+        <div class="card p-6">
+          <div class="text-3xl mb-4">{item.icon}</div>
+          <h3 class="font-semibold text-ghost mb-2">{item.title}</h3>
+          <p class="text-sm text-muted leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 2026 Trust Report -->
+  <section class="border-t border-border bg-slate/20 py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="font-mono text-xs text-mint uppercase tracking-widest">Free with subscription</span>
+          <h2 class="text-3xl font-bold mt-3 mb-4">The 2026 Trust Infrastructure Report</h2>
+          <p class="text-ghost/70 leading-relaxed mb-6">
+            A comprehensive analysis of the digital trust landscape: market maps, technology assessments,
+            protocol maturity scores, and predictions for the infrastructure shifts that will define
+            identity and security through 2028.
+          </p>
+          <ul class="space-y-2 text-sm text-ghost/70">
+            {[
+              '56 pages of trust infrastructure analysis',
+              'Comparative Trust Scores for 40+ providers',
+              'AI agent identity protocol landscape',
+              'Regulatory compliance roadmap for 2026-2028',
+            ].map(item => (
+              <li class="flex items-center gap-2">
+                <span class="text-mint">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="card p-8 border-mint/20 bg-mint/5 text-center">
+          <div class="font-mono text-xs text-mint mb-4">GET THE REPORT</div>
+          <div class="text-5xl mb-4">📋</div>
+          <p class="text-ghost/70 text-sm mb-6">Delivered immediately on signup</p>
+          <form id="report-form" class="space-y-3">
+            <input
+              type="email"
+              id="report-email"
+              placeholder="your@email.com"
+              required
+              class="w-full px-4 py-3 bg-midnight border border-border rounded-lg text-ghost placeholder-muted focus:outline-none focus:border-mint transition-colors text-sm"
+            />
+            <button
+              type="submit"
+              class="w-full px-4 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors text-sm"
+            >
+              Get Free Report →
+            </button>
+          </form>
+          <div id="report-success" class="hidden mt-3 text-mint text-sm">
+            ✓ Check your inbox. Report is on its way.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof placeholder -->
+  <section class="border-t border-border py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-muted text-sm mb-8">Read by trust architects at</p>
+      <div class="flex flex-wrap gap-8 justify-center items-center opacity-40">
+        {['Cloudflare', 'Okta', 'Anthropic', 'Stripe', 'Coinbase', 'NHS Digital'].map(co => (
+          <span class="font-mono text-sm text-ghost">{co}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function handleForm(formId: string, successId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement;
+    const success = document.getElementById(successId)!;
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    });
+  }
+
+  handleForm('signup-form', 'success-msg');
+  handleForm('report-form', 'report-success');
+</script>

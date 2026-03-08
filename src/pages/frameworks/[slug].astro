@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('frameworks');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = (await getCollection('frameworks')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const related = allPosts.filter(p => p.id !== post.id).slice(0, 3);
+---
+
+<BaseLayout
+  title={`${post.data.title} | TRST.com`}
+  description={post.data.description}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-border py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ol class="flex items-center gap-2 text-xs text-muted flex-wrap">
+        <li><a href="/" class="hover:text-ghost">Home</a></li>
+        <li class="text-border">→</li>
+        <li><a href="/frameworks" class="hover:text-ghost">Frameworks</a></li>
+        <li class="text-border">→</li>
+        <li class="text-ghost truncate max-w-48">{post.data.title}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid lg:grid-cols-4 gap-12">
+      <!-- Article -->
+      <article class="lg:col-span-3">
+        <!-- Meta -->
+        <header class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="px-2 py-0.5 text-xs font-mono text-mint bg-mint/10 border border-mint/20 rounded">
+              {post.data.category}
+            </span>
+            <span class="text-xs text-muted">{post.data.readTime}</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ghost mb-6 leading-tight">
+            {post.data.title}
+          </h1>
+          <p class="text-lg text-ghost/70 leading-relaxed mb-6">{post.data.description}</p>
+          <div class="flex items-center gap-4 text-sm text-muted border-t border-border pt-4">
+            <span>{post.data.author}</span>
+            <span>·</span>
+            <time datetime={post.data.date}>
+              {new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </time>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="prose-content">
+          <Content />
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="mt-12 pt-8 border-t border-border">
+          <div class="card p-6 bg-mint/5 border-mint/20">
+            <h3 class="font-semibold text-ghost mb-2">Assess Your Trust Maturity</h3>
+            <p class="text-sm text-muted mb-4">Take the Digital Trust Scorecard to see where your organization stands.</p>
+            <a href="/scorecard" class="inline-block px-4 py-2 bg-mint text-midnight text-sm font-semibold rounded hover:bg-mint-dim transition-colors">
+              Take the Scorecard →
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <div class="card p-5">
+          <h3 class="font-semibold text-ghost mb-4 text-sm">More Articles</h3>
+          <div class="space-y-4">
+            {related.map(rel => (
+              <a href={`/frameworks/${rel.id}`} class="block group">
+                <div class="text-xs font-mono text-mint mb-1">{rel.data.category}</div>
+                <div class="text-sm text-ghost/80 group-hover:text-mint transition-colors leading-snug">
+                  {rel.data.title}
+                </div>
+                <div class="text-xs text-muted mt-1">{rel.data.readTime}</div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="card p-5">
+          <h3 class="font-semibold text-ghost mb-3 text-sm">Trust Map</h3>
+          <p class="text-xs text-muted mb-4">Explore the providers implementing these standards.</p>
+          <a href="/infrastructure" class="block text-xs text-mint hover:underline">View Infrastructure Map →</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Related articles -->
+    {related.length > 0 && (
+      <section class="mt-16 pt-8 border-t border-border">
+        <h2 class="text-xl font-bold text-ghost mb-6">Related Articles</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          {related.map(rel => (
+            <a href={`/frameworks/${rel.id}`} class="card p-5 hover:border-mint/40 hover:bg-mint/5 transition-all group">
+              <div class="text-xs font-mono text-mint mb-2">{rel.data.category}</div>
+              <h3 class="font-semibold text-ghost group-hover:text-mint transition-colors text-sm mb-2">
+                {rel.data.title}
+              </h3>
+              <p class="text-xs text-muted line-clamp-2">{rel.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .prose-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 0.5rem;
+  }
+
+  .prose-content :global(h3) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #F8FAFC;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-content :global(p) {
+    color: rgba(248, 250, 252, 0.7);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .prose-content :global(ul), .prose-content :global(ol) {
+    color: rgba(248, 250, 252, 0.7);
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    space-y: 0.5rem;
+  }
+
+  .prose-content :global(li) {
+    margin-bottom: 0.4rem;
+    line-height: 1.7;
+  }
+
+  .prose-content :global(code) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    background: #1E293B;
+    border: 1px solid #334155;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: #A2FFD6;
+  }
+
+  .prose-content :global(pre) {
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .prose-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #A2FFD6;
+    font-size: 0.85rem;
+  }
+
+  .prose-content :global(blockquote) {
+    border-left: 3px solid #A2FFD6;
+    padding-left: 1rem;
+    color: rgba(248, 250, 252, 0.6);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+
+  .prose-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+
+  .prose-content :global(th) {
+    background: #1E293B;
+    color: #A2FFD6;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid #334155;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .prose-content :global(td) {
+    padding: 0.75rem 1rem;
+    border: 1px solid #334155;
+    color: rgba(248, 250, 252, 0.7);
+  }
+
+  .prose-content :global(tr:nth-child(even) td) {
+    background: rgba(30, 41, 59, 0.3);
+  }
+
+  .prose-content :global(a) {
+    color: #A2FFD6;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-content :global(strong) {
+    color: #F8FAFC;
+    font-weight: 600;
+  }
+
+  .prose-content :global(hr) {
+    border-color: #334155;
+    margin: 2rem 0;
+  }
+</style>

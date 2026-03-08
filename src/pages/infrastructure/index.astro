@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import { categories, providers, getProvidersByCategory } from '../../data/providers';
+---
+
+<BaseLayout
+  title="Trust Infrastructure Map | TRST.com"
+  description="The definitive directory of digital trust infrastructure—explore biometric authentication, decentralized identity, fraud prevention, zero trust security, and AI verification providers."
+>
+  <!-- Header -->
+  <section class="border-b border-border py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">Trust Infrastructure Map</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">The Trust Stack</h1>
+      <p class="text-ghost/70 max-w-2xl text-lg">
+        A hierarchical map of the technologies, protocols, and companies building the infrastructure of digital confidence.
+        {providers.length} providers across {categories.length} categories.
+      </p>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+    {categories.map(cat => {
+      const catProviders = getProvidersByCategory(cat.slug);
+      return (
+        <section>
+          <!-- Category header -->
+          <div class="flex items-start justify-between mb-8 pb-4 border-b border-border">
+            <div class="flex items-center gap-4">
+              <span class="text-4xl">{cat.icon}</span>
+              <div>
+                <h2 class="text-2xl font-bold text-ghost">{cat.name}</h2>
+                <p class="text-sm text-muted mt-1 max-w-xl">{cat.description}</p>
+              </div>
+            </div>
+            <a
+              href={`/infrastructure/${cat.slug}`}
+              class="hidden sm:inline-flex items-center gap-1 text-sm text-mint hover:underline shrink-0"
+            >
+              View all {catProviders.length} →
+            </a>
+          </div>
+
+          <!-- Providers grid -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {catProviders.map(provider => (
+              <a
+                href={`/infrastructure/${provider.categorySlug}/${provider.slug}`}
+                class="card p-5 hover:border-mint/40 hover:bg-mint/5 transition-all group"
+              >
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="font-semibold text-ghost group-hover:text-mint transition-colors">{provider.name}</h3>
+                  <span class="font-mono text-xs font-bold text-mint ml-2 shrink-0">
+                    {provider.trustScore}
+                  </span>
+                </div>
+                <p class="text-xs text-muted leading-relaxed mb-4 line-clamp-2">{provider.description}</p>
+                <div class="score-bar">
+                  <div class="score-bar-fill" style={`width: ${provider.trustScore}%`}></div>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-1">
+                  {provider.tags.slice(0, 2).map(tag => (
+                    <span class="px-2 py-0.5 text-xs bg-border/50 text-muted rounded">{tag}</span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+
+  <!-- CTA -->
+  <section class="border-t border-border bg-slate/20 py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-bold mb-4">Is your infrastructure ready?</h2>
+      <p class="text-muted mb-8">Take the Digital Trust Scorecard to assess your organization's trust maturity.</p>
+      <a href="/scorecard" class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors">
+        Take the Scorecard →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

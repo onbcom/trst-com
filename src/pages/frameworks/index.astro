@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('frameworks')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const categories = [...new Set(posts.map(p => p.data.category))];
+---
+
+<BaseLayout
+  title="Trust Frameworks & Protocols | TRST.com"
+  description="In-depth articles on digital trust protocols, standards, and architectures: DID, OIDC, Zero-Knowledge Proofs, Zero Trust, and AI agent authentication."
+>
+  <!-- Header -->
+  <section class="border-b border-border py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">Frameworks</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Trust Protocols & Standards</h1>
+      <p class="text-ghost/70 max-w-2xl text-lg">
+        Technical deep-dives into the frameworks and protocols defining the digital trust landscape in 2026.
+      </p>
+    </div>
+  </section>
+
+  <!-- Categories filter -->
+  <div class="border-b border-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-2 flex-wrap">
+      <span class="px-3 py-1.5 text-xs font-mono bg-mint/10 text-mint border border-mint/20 rounded">All</span>
+      {categories.map(cat => (
+        <span class="px-3 py-1.5 text-xs font-mono text-muted border border-border rounded hover:border-mint/30 hover:text-ghost cursor-pointer transition-colors">
+          {cat}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Articles -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid gap-6 lg:grid-cols-2">
+      {posts.map((post, i) => (
+        <a
+          href={`/frameworks/${post.id}`}
+          class={`card p-6 hover:border-mint/40 hover:bg-mint/5 transition-all group ${i === 0 ? 'lg:col-span-2' : ''}`}
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="px-2 py-0.5 text-xs font-mono text-mint bg-mint/10 border border-mint/20 rounded">
+                  {post.data.category}
+                </span>
+                <span class="text-xs text-muted">{post.data.readTime}</span>
+              </div>
+              <h2 class={`font-bold text-ghost group-hover:text-mint transition-colors mb-2 ${i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>
+                {post.data.title}
+              </h2>
+              <p class="text-sm text-muted leading-relaxed">{post.data.description}</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center justify-between text-xs text-muted border-t border-border pt-4">
+            <span>{post.data.author}</span>
+            <span>{new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Newsletter CTA -->
+  <section class="border-t border-border bg-slate/20 py-16">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">The Trust Signal</p>
+      <h2 class="text-2xl font-bold mb-4">Weekly trust intelligence</h2>
+      <p class="text-muted mb-8">New frameworks, protocol updates, and infrastructure analysis in your inbox every week.</p>
+      <a href="/newsletter" class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors">
+        Subscribe →
+      </a>
+    </div>
+  </section>
+</BaseLayout>
