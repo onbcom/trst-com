@@ -36,6 +36,95 @@ import Footer from '../components/Footer.astro';
     class="pointer-events-none w-full h-full object-cover absolute top-0 right-0 bottom-0 left-0 opacity-40 mix-blend-overlay"
   />
 
+  <!-- Upper hero visual elements -->
+  <div class="pointer-events-none absolute inset-0 z-[6] overflow-hidden">
+
+    <!-- Radial glow behind shield -->
+    <div class="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full" style="background: radial-gradient(circle, rgba(167,139,250,0.18) 0%, rgba(96,165,250,0.10) 40%, transparent 70%); animation: heroGlow 8s ease-in-out infinite;"></div>
+
+    <!-- Central trust/shield graphic -->
+    <div class="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div style="animation: heroFloat 8s ease-in-out infinite;">
+        <svg width="360" height="360" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: heroPulse 8s ease-in-out infinite;">
+          <!-- Outer rings -->
+          <circle cx="180" cy="180" r="168" stroke="white" stroke-width="0.5" stroke-dasharray="3 9" stroke-opacity="0.9"/>
+          <circle cx="180" cy="180" r="140" stroke="white" stroke-width="0.5" stroke-dasharray="2 7" stroke-opacity="0.7"/>
+          <circle cx="180" cy="180" r="112" stroke="white" stroke-width="0.6" stroke-opacity="0.6"/>
+          <!-- Shield body -->
+          <path d="M180 38 L292 94 L292 196 C292 256 180 322 180 322 C180 322 68 256 68 196 L68 94 Z" stroke="white" stroke-width="1.5" fill="white" fill-opacity="0.06" stroke-opacity="1"/>
+          <!-- Inner shield -->
+          <path d="M180 72 L268 116 L268 192 C268 238 180 294 180 294 C180 294 92 238 92 192 L92 116 Z" stroke="white" stroke-width="0.7" fill="none" stroke-opacity="0.65"/>
+          <!-- Checkmark -->
+          <path d="M148 178 L168 198 L216 150" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1"/>
+          <!-- Data nodes -->
+          <circle cx="180" cy="180" r="4" fill="white" fill-opacity="0.7"/>
+          <circle cx="106" cy="136" r="2.5" fill="white" fill-opacity="0.6"/>
+          <circle cx="254" cy="136" r="2.5" fill="white" fill-opacity="0.6"/>
+          <circle cx="88" cy="210" r="2" fill="white" fill-opacity="0.5"/>
+          <circle cx="272" cy="210" r="2" fill="white" fill-opacity="0.5"/>
+          <circle cx="148" cy="88" r="1.5" fill="white" fill-opacity="0.5"/>
+          <circle cx="212" cy="88" r="1.5" fill="white" fill-opacity="0.5"/>
+          <!-- Connection lines -->
+          <line x1="180" y1="180" x2="106" y2="136" stroke="white" stroke-width="0.4" stroke-opacity="0.4"/>
+          <line x1="180" y1="180" x2="254" y2="136" stroke="white" stroke-width="0.4" stroke-opacity="0.4"/>
+          <line x1="180" y1="180" x2="88" y2="210" stroke="white" stroke-width="0.4" stroke-opacity="0.35"/>
+          <line x1="180" y1="180" x2="272" y2="210" stroke="white" stroke-width="0.4" stroke-opacity="0.35"/>
+          <line x1="180" y1="180" x2="148" y2="88" stroke="white" stroke-width="0.4" stroke-opacity="0.35"/>
+          <line x1="180" y1="180" x2="212" y2="88" stroke="white" stroke-width="0.4" stroke-opacity="0.35"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Floating metric card: Trust Score -->
+    <div class="absolute hidden md:flex top-[28%] left-[6%] items-center gap-3 rounded-2xl px-4 py-3" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.08); animation: heroFloat 5s ease-in-out infinite 0.5s;">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(192,132,252,0.2); box-shadow: 0 0 0 1px rgba(192,132,252,0.35);">
+        <iconify-icon icon="solar:graph-up-linear" class="text-purple-300 text-base"></iconify-icon>
+      </div>
+      <div>
+        <div class="text-[10px] text-white/50 font-geist uppercase tracking-wider leading-none">Trust Score</div>
+        <div class="text-white font-geist font-semibold text-xl leading-tight mt-1">924</div>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full ml-1 flex-shrink-0" style="background: #a78bfa; box-shadow: 0 0 10px rgba(167,139,250,1);"></div>
+    </div>
+
+    <!-- Floating metric card: Verified Identities -->
+    <div class="absolute hidden md:flex top-[18%] right-[6%] items-center gap-3 rounded-2xl px-4 py-3" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.08); animation: heroFloat 7s ease-in-out infinite 1s;">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(52,211,153,0.2); box-shadow: 0 0 0 1px rgba(52,211,153,0.35);">
+        <iconify-icon icon="solar:users-group-two-rounded-linear" class="text-emerald-300 text-base"></iconify-icon>
+      </div>
+      <div>
+        <div class="text-[10px] text-white/50 font-geist uppercase tracking-wider leading-none">Verified Identities</div>
+        <div class="text-white font-geist font-semibold text-xl leading-tight mt-1">2.4M</div>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full ml-1 flex-shrink-0" style="background: #34d399; box-shadow: 0 0 10px rgba(52,211,153,1);"></div>
+    </div>
+
+    <!-- Floating metric card: ZK Proofs -->
+    <div class="absolute hidden md:flex top-[48%] right-[5%] items-center gap-3 rounded-2xl px-4 py-3" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.08); animation: heroFloat 6s ease-in-out infinite 2s;">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(96,165,250,0.2); box-shadow: 0 0 0 1px rgba(96,165,250,0.35);">
+        <iconify-icon icon="solar:shield-keyhole-linear" class="text-blue-300 text-base"></iconify-icon>
+      </div>
+      <div>
+        <div class="text-[10px] text-white/50 font-geist uppercase tracking-wider leading-none">ZK Proofs</div>
+        <div class="text-white font-geist font-semibold text-sm leading-tight mt-1">Active</div>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full ml-1 flex-shrink-0" style="background: #60a5fa; box-shadow: 0 0 10px rgba(96,165,250,1);"></div>
+    </div>
+
+    <!-- Floating metric card: Threat Blocks (new) -->
+    <div class="absolute hidden lg:flex top-[12%] left-[9%] items-center gap-3 rounded-2xl px-4 py-3" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(16px); box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.08); animation: heroFloat 9s ease-in-out infinite 3s;">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background: rgba(251,146,60,0.2); box-shadow: 0 0 0 1px rgba(251,146,60,0.35);">
+        <iconify-icon icon="solar:danger-triangle-linear" class="text-orange-300 text-base"></iconify-icon>
+      </div>
+      <div>
+        <div class="text-[10px] text-white/50 font-geist uppercase tracking-wider leading-none">Threat Blocks</div>
+        <div class="text-white font-geist font-semibold text-xl leading-tight mt-1">18.7K</div>
+      </div>
+      <div class="w-1.5 h-1.5 rounded-full ml-1 flex-shrink-0" style="background: #fb923c; box-shadow: 0 0 10px rgba(251,146,60,1);"></div>
+    </div>
+
+  </div>
+
   <!-- Header -->
   <header class="z-10 border-white/5 border-b relative">
     <div class="flex md:px-8 max-w-7xl mx-auto py-5 px-6 items-center justify-between">
