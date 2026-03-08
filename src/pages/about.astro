@@ -1,21 +1,30 @@
 ---
-import BaseLayout from '../components/BaseLayout.astro';
+import InnerLayout from '../components/InnerLayout.astro';
 ---
 
-<BaseLayout
-  title="About TRST.com | Our Mission"
+<InnerLayout
+  title="About TRST.com | Architecting Digital Trust"
   description="TRST.com is the definitive authority on the invisible infrastructure of the digital economy. Our mission: map the technologies and protocols making modern trust possible."
 >
-  <!-- Hero -->
-  <section class="border-b border-border py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+  <!-- Page Hero -->
+  <section class="relative overflow-hidden py-24 bg-slate-950">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-y-0 left-[12.5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+      <div class="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+      <div class="absolute inset-y-0 left-[87.5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
       <div class="max-w-3xl">
-        <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">About</p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-6">
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist mb-6">
+          <iconify-icon icon="solar:shield-check-linear" class="text-sm"></iconify-icon>
+          About
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight font-geist text-white mb-6">
           Defining the<br />
-          <span class="text-gradient">Trust Economy</span>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-white/80 to-white/40">Trust Economy</span>
         </h1>
-        <p class="text-lg text-ghost/70 leading-relaxed">
+        <p class="text-lg text-white/70 leading-relaxed font-geist">
           TRST.com is the definitive authority on the invisible infrastructure of the digital economy.
           We map the technologies, frameworks, and protocols that make modern commerce, identity, and
           AI interaction possible.
@@ -25,130 +34,107 @@ import BaseLayout from '../components/BaseLayout.astro';
   </section>
 
   <!-- Mission -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <div>
-        <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
-        <div class="space-y-4 text-ghost/70 leading-relaxed">
-          <p>
-            In 2026, the digital economy operates on the premise of trust. Every transaction, every login,
-            every AI interaction rests on a foundation of protocols and systems most people never see.
-          </p>
-          <p>
-            TRST was created to make that invisible infrastructure visible. We believe that the architects
-            of the next digital era—developers, security professionals, product leaders, and policymakers—need
-            a comprehensive, technically rigorous reference for the trust layer.
-          </p>
-          <p>
-            We provide independent analysis of the technologies, vendors, and standards shaping how
-            humans and machines establish, verify, and maintain trust in digital environments.
-          </p>
+  <section class="relative bg-slate-950 py-20 border-t border-white/5" id="about">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist mb-6 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.1s_both]">
+            <iconify-icon icon="solar:target-linear" class="text-sm text-blue-400"></iconify-icon>
+            Our Mission
+          </div>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight font-geist text-white mb-6 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.15s_both]">Why TRST Exists</h2>
+          <div class="space-y-4 text-white/70 leading-relaxed font-geist animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.2s_both]">
+            <p>
+              In 2026, the digital economy operates on the premise of trust. Every transaction, every login,
+              every AI interaction rests on a foundation of protocols and systems most people never see.
+            </p>
+            <p>
+              TRST was created to make that invisible infrastructure visible. We believe that the architects
+              of the next digital era—developers, security professionals, product leaders, and policymakers—need
+              a comprehensive, technically rigorous reference for the trust layer.
+            </p>
+            <p>
+              We provide independent analysis of the technologies, vendors, and standards shaping how
+              humans and machines establish, verify, and maintain trust in digital environments.
+            </p>
+          </div>
+          <blockquote class="mt-8 border-l-2 border-white/20 pl-6 text-white/60 font-geist italic animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.25s_both]">
+            "Security is about keeping people out. Trust is about letting the right people in."
+          </blockquote>
+        </div>
+
+        <div class="space-y-4">
+          {[
+            { title: 'Technological Analysis', desc: 'We assess platforms based on cryptographic security, user privacy, scalability, and interoperability.', icon: 'solar:microscope-linear', delay: '0.2s' },
+            { title: 'Independent Perspective', desc: 'No vendor relationships influence our Trust Scores. Our ratings are based on public technical analysis.', icon: 'solar:scale-linear', delay: '0.25s' },
+            { title: 'Forward-Looking', desc: 'We focus on the 2026 and beyond trust stack—including AI agent identity, ZK proofs, and self-sovereign systems.', icon: 'solar:telescope-linear', delay: '0.3s' },
+            { title: 'Developer-First', desc: 'Our content is designed for the engineers and architects building the next generation of trust infrastructure.', icon: 'solar:code-square-linear', delay: '0.35s' },
+          ].map(item => (
+            <div class={`rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-5 flex gap-4 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_${item.delay}_both]`}>
+              <iconify-icon icon={item.icon} class="text-2xl text-white/50 shrink-0 mt-0.5"></iconify-icon>
+              <div>
+                <h3 class="font-semibold text-white font-geist mb-1">{item.title}</h3>
+                <p class="text-sm text-slate-400 leading-relaxed font-geist">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="space-y-4">
+  <!-- Principles -->
+  <section class="relative bg-slate-950 py-20 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist mb-4 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.1s_both]">
+          <iconify-icon icon="solar:compass-linear" class="text-sm text-purple-400"></iconify-icon>
+          Core Principles
+        </div>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight font-geist text-white animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.15s_both]">Our Principles</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
-          {
-            title: 'Technological Analysis',
-            desc: 'We assess platforms based on cryptographic security, user privacy, scalability, and interoperability.',
-            icon: '🔬',
-          },
-          {
-            title: 'Independent Perspective',
-            desc: 'No vendor relationships influence our Trust Scores. Our ratings are based on public technical analysis.',
-            icon: '⚖️',
-          },
-          {
-            title: 'Forward-Looking',
-            desc: 'We focus on the 2026 and beyond trust stack—including AI agent identity, ZK proofs, and self-sovereign systems.',
-            icon: '🔭',
-          },
-          {
-            title: 'Developer-First',
-            desc: 'Our content is designed for the engineers and architects building the next generation of trust infrastructure.',
-            icon: '💻',
-          },
-        ].map(item => (
-          <div class="card p-5 flex gap-4">
-            <span class="text-2xl shrink-0">{item.icon}</span>
-            <div>
-              <h3 class="font-semibold text-ghost mb-1">{item.title}</h3>
-              <p class="text-sm text-muted leading-relaxed">{item.desc}</p>
-            </div>
+          { num: '01', title: 'Cryptography First', desc: 'Trust must be mathematically provable, not merely assumed.', color: 'text-blue-400' },
+          { num: '02', title: 'Privacy by Design', desc: 'Verification should reveal minimum necessary information.', color: 'text-emerald-400' },
+          { num: '03', title: 'Decentralization', desc: 'Trust systems with single points of failure are not trustworthy.', color: 'text-purple-400' },
+          { num: '04', title: 'Open Standards', desc: 'Interoperable standards prevent lock-in and enable ecosystem trust.', color: 'text-orange-400' },
+          { num: '05', title: 'Human Sovereignty', desc: 'Individuals must retain control over their digital identity.', color: 'text-blue-400' },
+          { num: '06', title: 'AI Accountability', desc: 'Autonomous agents must be as accountable as human actors.', color: 'text-red-400' },
+        ].map((p, i) => (
+          <div class={`rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-6 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_${0.15 + i * 0.05}s_both]`}>
+            <div class={`font-geist text-xs font-medium mb-3 ${p.color}`}>{p.num}</div>
+            <h3 class="font-semibold text-white font-geist mb-2">{p.title}</h3>
+            <p class="text-sm text-slate-400 leading-relaxed font-geist">{p.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- The Problem We Solve -->
-  <section class="border-t border-border bg-slate/20 py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3 text-center">The Problem</p>
-      <h2 class="text-3xl font-bold mb-8 text-center">Why TRST Exists</h2>
-      <div class="space-y-6 text-ghost/70 leading-relaxed">
-        <p>
-          The explosion of generative AI in 2025–2026 introduced a fundamental crisis of trust. When
-          synthetic media is indistinguishable from authentic content, when AI agents can impersonate
-          humans at scale, and when the "cost of deception" approaches zero—the systems that verify
-          what is real become critical infrastructure.
-        </p>
-        <p>
-          Yet the trust infrastructure landscape is fragmented, rapidly evolving, and poorly documented
-          for the practitioners who need to build with it. TRST fills that gap: a single authoritative
-          reference for the technologies that answer the question "can we trust this?"
-        </p>
-        <p class="font-mono text-sm text-ghost border border-border rounded-lg p-4 bg-midnight">
-          "Security is about keeping people out. Trust is about letting the right people in."
+  <!-- Disclaimer + CTA -->
+  <section class="relative bg-slate-950 py-16 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-6 md:px-8">
+      <div class="rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-8 mb-12 text-center">
+        <p class="text-xs text-slate-400 font-geist leading-relaxed">
+          <span class="text-white/60 font-medium">Disclaimer:</span> TRST.com provides technological analysis and is not a legal or security auditing firm.
+          Trust Scores are based on publicly available technical analysis and do not constitute endorsements.
+          This site complies with GDPR-v3 and CCPA-2026 data handling standards.
         </p>
       </div>
-    </div>
-  </section>
-
-  <!-- Principles -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-border">
-    <h2 class="text-3xl font-bold mb-10 text-center">Our Principles</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[
-        { num: '01', title: 'Cryptography First', desc: 'Trust must be mathematically provable, not merely assumed.' },
-        { num: '02', title: 'Privacy by Design', desc: 'Verification should reveal minimum necessary information.' },
-        { num: '03', title: 'Decentralization', desc: 'Trust systems with single points of failure are not trustworthy.' },
-        { num: '04', title: 'Open Standards', desc: 'Interoperable standards prevent lock-in and enable ecosystem trust.' },
-        { num: '05', title: 'Human Sovereignty', desc: 'Individuals must retain control over their digital identity.' },
-        { num: '06', title: 'AI Accountability', desc: 'Autonomous agents must be as accountable as human actors.' },
-      ].map(p => (
-        <div class="card p-6">
-          <div class="font-mono text-xs text-mint mb-3">{p.num}</div>
-          <h3 class="font-semibold text-ghost mb-2">{p.title}</h3>
-          <p class="text-sm text-muted leading-relaxed">{p.desc}</p>
+      <div class="text-center">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight font-geist text-white mb-8 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.1s_both]">Start Exploring</h2>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="/infrastructure" class="inline-flex items-center gap-2 ring-1 ring-white/20 transition hover:bg-neutral-100 text-sm font-medium text-neutral-900 font-geist bg-white rounded-full py-2.5 px-5">
+            View the Trust Map
+            <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
+          </a>
+          <a href="/newsletter" class="inline-flex items-center gap-2 ring-1 ring-white/20 transition hover:bg-white/10 text-sm font-medium text-white/90 font-geist bg-white/5 rounded-full py-2.5 px-5">
+            Subscribe to The Trust Signal
+          </a>
         </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Disclaimer -->
-  <section class="border-t border-border py-12 bg-slate/20">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-xs text-muted leading-relaxed">
-        <strong class="text-ghost/50">Disclaimer:</strong> TRST.com provides technological analysis and is not a legal or security auditing firm.
-        Trust Scores are based on publicly available technical analysis and do not constitute endorsements.
-        This site complies with GDPR-v3 and CCPA-2026 data handling standards.
-      </p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="py-20 border-t border-border">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-6">Start Exploring</h2>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/infrastructure" class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors">
-          View the Trust Map
-        </a>
-        <a href="/newsletter" class="px-6 py-3 border border-border text-ghost/80 font-semibold rounded-lg hover:border-mint hover:text-mint transition-colors">
-          Subscribe to The Trust Signal
-        </a>
       </div>
     </div>
   </section>
-</BaseLayout>
+
+</InnerLayout>

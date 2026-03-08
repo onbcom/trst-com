@@ -1,81 +1,91 @@
 ---
-import BaseLayout from '../../components/BaseLayout.astro';
+import InnerLayout from '../../components/InnerLayout.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('frameworks')).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-const categories = [...new Set(posts.map(p => p.data.category))];
+const categoryColors: Record<string, string> = {
+  'Identity Protocol': 'text-blue-400',
+  'Security Architecture': 'text-emerald-400',
+  'Cryptography': 'text-purple-400',
+  'Agent Security': 'text-orange-400',
+  'Network Dynamics': 'text-purple-400',
+};
 ---
 
-<BaseLayout
+<InnerLayout
   title="Trust Frameworks & Protocols | TRST.com"
   description="In-depth articles on digital trust protocols, standards, and architectures: DID, OIDC, Zero-Knowledge Proofs, Zero Trust, and AI agent authentication."
 >
-  <!-- Header -->
-  <section class="border-b border-border py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">Frameworks</p>
-      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Trust Protocols & Standards</h1>
-      <p class="text-ghost/70 max-w-2xl text-lg">
-        Technical deep-dives into the frameworks and protocols defining the digital trust landscape in 2026.
+
+  <section class="relative overflow-hidden py-24 bg-slate-950">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-y-0 left-[12.5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+      <div class="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+      <div class="absolute inset-y-0 left-[87.5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
+      <div class="inline-flex text-[11px] ring-1 ring-white/10 font-medium text-white/70 font-geist bg-white/5 rounded-full py-1.5 px-3 gap-2 items-center mb-4">
+        Technical Deep-Dives
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight font-geist text-white mb-6">
+        Trust Frameworks
+      </h1>
+      <p class="text-lg text-white/70 leading-relaxed font-geist max-w-2xl">
+        Explore the underlying architecture and specifications powering the 2026 digital trust economy.
       </p>
     </div>
   </section>
 
-  <!-- Categories filter -->
-  <div class="border-b border-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-2 flex-wrap">
-      <span class="px-3 py-1.5 text-xs font-mono bg-mint/10 text-mint border border-mint/20 rounded">All</span>
-      {categories.map(cat => (
-        <span class="px-3 py-1.5 text-xs font-mono text-muted border border-border rounded hover:border-mint/30 hover:text-ghost cursor-pointer transition-colors">
-          {cat}
-        </span>
-      ))}
+  <section class="relative bg-slate-950 py-16 border-t border-white/5">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-y-0 left-[12.5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+      <div class="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+      <div class="absolute inset-y-0 left-[87.5%] w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
     </div>
-  </div>
-
-  <!-- Articles -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid gap-6 lg:grid-cols-2">
-      {posts.map((post, i) => (
-        <a
-          href={`/frameworks/${post.id}`}
-          class={`card p-6 hover:border-mint/40 hover:bg-mint/5 transition-all group ${i === 0 ? 'lg:col-span-2' : ''}`}
-        >
-          <div class="flex items-start justify-between gap-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="px-2 py-0.5 text-xs font-mono text-mint bg-mint/10 border border-mint/20 rounded">
-                  {post.data.category}
-                </span>
-                <span class="text-xs text-muted">{post.data.readTime}</span>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {posts.map((post) => (
+          <a
+            href={`/frameworks/${post.id}`}
+            class="group flex flex-col rounded-3xl bg-white/5 ring-1 ring-white/10 hover:ring-white/30 hover:bg-white/10 transition-all duration-300 overflow-hidden backdrop-blur-md animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.1s_both]"
+          >
+            <div class="p-6 flex-1 flex flex-col">
+              <div class={`text-[11px] font-medium font-geist uppercase tracking-wider mb-3 ${categoryColors[post.data.category] || 'text-white/60'}`}>
+                {post.data.category}
               </div>
-              <h2 class={`font-bold text-ghost group-hover:text-mint transition-colors mb-2 ${i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>
+              <h2 class="text-xl font-semibold tracking-tight text-white font-geist group-hover:text-blue-200 transition-colors mb-3">
                 {post.data.title}
               </h2>
-              <p class="text-sm text-muted leading-relaxed">{post.data.description}</p>
+              <p class="text-sm text-slate-400 font-geist leading-relaxed flex-1">{post.data.description}</p>
+              <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+                <span class="text-xs text-slate-500 font-geist">{post.data.readTime}</span>
+                <div class="flex items-center text-sm font-medium text-white/90 font-geist gap-2">
+                  Read <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="mt-4 flex items-center justify-between text-xs text-muted border-t border-border pt-4">
-            <span>{post.data.author}</span>
-            <span>{new Date(post.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-          </div>
-        </a>
-      ))}
+          </a>
+        ))}
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Newsletter CTA -->
-  <section class="border-t border-border bg-slate/20 py-16">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">The Trust Signal</p>
-      <h2 class="text-2xl font-bold mb-4">Weekly trust intelligence</h2>
-      <p class="text-muted mb-8">New frameworks, protocol updates, and infrastructure analysis in your inbox every week.</p>
-      <a href="/newsletter" class="px-6 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors">
-        Subscribe →
+  <section class="relative bg-slate-950 py-20 border-t border-white/5">
+    <div class="max-w-2xl mx-auto px-6 md:px-8 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist mb-4">
+        <iconify-icon icon="solar:letter-linear" class="text-sm text-blue-400"></iconify-icon>
+        The Trust Signal
+      </div>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight font-geist text-white mb-4">Weekly trust intelligence</h2>
+      <p class="text-slate-400 font-geist mb-8">New frameworks, protocol updates, and infrastructure analysis in your inbox every week.</p>
+      <a href="/newsletter" class="inline-flex items-center gap-2 ring-1 ring-white/20 transition hover:bg-neutral-100 text-sm font-medium text-neutral-900 font-geist bg-white rounded-full py-2.5 px-5">
+        Subscribe to The Trust Signal
+        <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
       </a>
     </div>
   </section>
-</BaseLayout>
+
+</InnerLayout>

@@ -1,69 +1,77 @@
 ---
-const year = new Date().getFullYear();
-
-const links = {
-  'Infrastructure': [
-    { href: '/infrastructure', label: 'Trust Map' },
-    { href: '/infrastructure/decentralized-identity', label: 'Decentralized Identity' },
-    { href: '/infrastructure/biometric-authentication', label: 'Biometric Auth' },
-    { href: '/infrastructure/fraud-prevention', label: 'Fraud Prevention' },
-  ],
-  'Frameworks': [
-    { href: '/frameworks', label: 'All Articles' },
-    { href: '/frameworks/did-foundation', label: 'What is DID?' },
-    { href: '/frameworks/zero-knowledge-proofs', label: 'Zero-Knowledge Proofs' },
-    { href: '/frameworks/ai-agent-authentication', label: 'AI Agent Auth' },
-  ],
-  'Tools': [
-    { href: '/scorecard', label: 'Trust Scorecard' },
-    { href: '/newsletter', label: 'The Trust Signal' },
-  ],
-  'Company': [
-    { href: '/about', label: 'About TRST' },
-  ],
-};
 ---
 
-<footer class="border-t border-border mt-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+<footer class="overflow-hidden bg-slate-950 border-white/5 border-t relative">
+  <div class="pointer-events-none z-0 absolute inset-0">
+    <div class="absolute inset-y-0 left-[12.5%] w-px bg-gradient-to-b from-white/5 via-white/5 to-transparent"></div>
+    <div class="absolute inset-y-0 left-[37.5%] w-px bg-gradient-to-b from-white/5 via-white/5 to-transparent"></div>
+    <div class="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-white/5 via-white/5 to-transparent"></div>
+    <div class="absolute inset-y-0 left-[62.5%] w-px bg-gradient-to-b from-white/5 via-white/5 to-transparent"></div>
+  </div>
+
+  <div class="z-10 md:px-8 lg:py-20 max-w-7xl mx-auto py-16 px-6 relative">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12">
       <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
-        <a href="/" class="flex items-center gap-2 mb-4">
-          <span class="font-mono text-xl font-bold text-mint">TRST</span>
-          <span class="font-mono text-xs text-muted border border-border px-1 py-0.5 rounded">.com</span>
-        </a>
-        <p class="text-sm text-muted leading-relaxed">
-          The definitive authority on digital trust infrastructure.
+      <div class="col-span-2">
+        <span class="text-2xl font-semibold tracking-tight text-white font-geist">TRST.com</span>
+        <p class="mt-4 text-sm text-slate-400 leading-relaxed font-geist max-w-xs">
+          Architecting a Trustworthy Future. The definitive layer for identity, authentication, and reputation.
         </p>
+        <div class="mt-6 flex items-center gap-3">
+          <a href="#" class="w-9 h-9 rounded-full bg-white/5 ring-1 ring-white/10 flex items-center justify-center text-slate-400 hover:bg-white/10 hover:text-white transition">
+            <iconify-icon icon="solar:map-arrow-up-linear" class="text-lg"></iconify-icon>
+          </a>
+          <a href="/newsletter" class="w-9 h-9 rounded-full bg-white/5 ring-1 ring-white/10 flex items-center justify-center text-slate-400 hover:bg-white/10 hover:text-white transition">
+            <iconify-icon icon="solar:letter-opened-linear" class="text-lg"></iconify-icon>
+          </a>
+        </div>
       </div>
 
-      <!-- Nav columns -->
-      {Object.entries(links).map(([section, items]) => (
-        <div>
-          <h3 class="text-xs font-semibold text-mint uppercase tracking-widest mb-4">
-            {section}
-          </h3>
-          <ul class="space-y-2">
-            {items.map(item => (
-              <li>
-                <a href={item.href} class="text-sm text-muted hover:text-ghost transition-colors">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <!-- Platform -->
+      <div>
+        <h3 class="text-sm font-medium text-white font-geist">Platform</h3>
+        <ul class="mt-4 space-y-3">
+          <li><a href="/infrastructure" class="text-sm text-slate-400 hover:text-white transition font-geist">Infrastructure Map</a></li>
+          <li><a href="/frameworks" class="text-sm text-slate-400 hover:text-white transition font-geist">Frameworks</a></li>
+          <li><a href="/scorecard" class="text-sm text-slate-400 hover:text-white transition font-geist">Scorecard API</a></li>
+          <li><a href="#" class="text-sm text-slate-400 hover:text-white transition font-geist">Network Status</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h3 class="text-sm font-medium text-white font-geist">Resources</h3>
+        <ul class="mt-4 space-y-3">
+          <li><a href="/frameworks" class="text-sm text-slate-400 hover:text-white transition font-geist">Documentation</a></li>
+          <li><a href="/frameworks" class="text-sm text-slate-400 hover:text-white transition font-geist">Whitepapers</a></li>
+          <li><a href="/frameworks" class="text-sm text-slate-400 hover:text-white transition font-geist">Developer Hub</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-sm font-medium text-white font-geist">Company</h3>
+        <ul class="mt-4 space-y-3">
+          <li><a href="/about" class="text-sm text-slate-400 hover:text-white transition font-geist">About Us</a></li>
+          <li><a href="#" class="text-sm text-slate-400 hover:text-white transition font-geist">Careers</a></li>
+          <li><a href="#" class="text-sm text-slate-400 hover:text-white transition font-geist">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="text-sm font-medium text-white font-geist">Legal</h3>
+        <ul class="mt-4 space-y-3">
+          <li><a href="#" class="text-sm text-slate-400 hover:text-white transition font-geist">Privacy Policy</a></li>
+          <li><a href="#" class="text-sm text-slate-400 hover:text-white transition font-geist">Terms of Use</a></li>
+          <li><a href="#" class="text-sm text-slate-400 hover:text-white transition font-geist">Compliance</a></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-      <p class="text-xs text-muted">
-        &copy; {year} TRST.com — Digital Trust Infrastructure Authority
-      </p>
-      <p class="text-xs text-muted">
-        Provides technological analysis. Not a legal or security auditing firm.
-      </p>
+    <!-- Bottom bar -->
+    <div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-400 font-geist">© 2026 TRST.com. Architecting a Trustworthy Future.</p>
     </div>
   </div>
 </footer>

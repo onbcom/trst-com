@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../components/BaseLayout.astro';
+import InnerLayout from '../../components/InnerLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -19,40 +19,39 @@ const allPosts = (await getCollection('frameworks')).sort(
 const related = allPosts.filter(p => p.id !== post.id).slice(0, 3);
 ---
 
-<BaseLayout
+<InnerLayout
   title={`${post.data.title} | TRST.com`}
   description={post.data.description}
 >
   <!-- Breadcrumb -->
-  <nav class="border-b border-border py-3">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ol class="flex items-center gap-2 text-xs text-muted flex-wrap">
-        <li><a href="/" class="hover:text-ghost">Home</a></li>
-        <li class="text-border">→</li>
-        <li><a href="/frameworks" class="hover:text-ghost">Frameworks</a></li>
-        <li class="text-border">→</li>
-        <li class="text-ghost truncate max-w-48">{post.data.title}</li>
+  <nav class="border-b border-white/5 bg-slate-950 py-3">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <ol class="flex items-center gap-2 text-xs text-slate-500 flex-wrap font-geist">
+        <li><a href="/" class="hover:text-white transition">Home</a></li>
+        <li class="text-slate-700">→</li>
+        <li><a href="/frameworks" class="hover:text-white transition">Frameworks</a></li>
+        <li class="text-slate-700">→</li>
+        <li class="text-slate-300 truncate max-w-48">{post.data.title}</li>
       </ol>
     </div>
   </nav>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="bg-slate-950 max-w-7xl mx-auto px-6 md:px-8 py-12">
     <div class="grid lg:grid-cols-4 gap-12">
       <!-- Article -->
       <article class="lg:col-span-3">
-        <!-- Meta -->
         <header class="mb-10">
           <div class="flex items-center gap-3 mb-4">
-            <span class="px-2 py-0.5 text-xs font-mono text-mint bg-mint/10 border border-mint/20 rounded">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist">
               {post.data.category}
             </span>
-            <span class="text-xs text-muted">{post.data.readTime}</span>
+            <span class="text-xs text-slate-500 font-geist">{post.data.readTime}</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ghost mb-6 leading-tight">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight font-geist text-white mb-6 leading-tight">
             {post.data.title}
           </h1>
-          <p class="text-lg text-ghost/70 leading-relaxed mb-6">{post.data.description}</p>
-          <div class="flex items-center gap-4 text-sm text-muted border-t border-border pt-4">
+          <p class="text-lg text-white/70 leading-relaxed font-geist mb-6">{post.data.description}</p>
+          <div class="flex items-center gap-4 text-sm text-slate-500 border-t border-white/5 pt-4 font-geist">
             <span>{post.data.author}</span>
             <span>·</span>
             <time datetime={post.data.date}>
@@ -61,18 +60,17 @@ const related = allPosts.filter(p => p.id !== post.id).slice(0, 3);
           </div>
         </header>
 
-        <!-- Content -->
         <div class="prose-content">
           <Content />
         </div>
 
-        <!-- Footer CTA -->
-        <div class="mt-12 pt-8 border-t border-border">
-          <div class="card p-6 bg-mint/5 border-mint/20">
-            <h3 class="font-semibold text-ghost mb-2">Assess Your Trust Maturity</h3>
-            <p class="text-sm text-muted mb-4">Take the Digital Trust Scorecard to see where your organization stands.</p>
-            <a href="/scorecard" class="inline-block px-4 py-2 bg-mint text-midnight text-sm font-semibold rounded hover:bg-mint-dim transition-colors">
-              Take the Scorecard →
+        <div class="mt-12 pt-8 border-t border-white/5">
+          <div class="rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-6">
+            <h3 class="font-semibold text-white font-geist mb-2">Assess Your Trust Maturity</h3>
+            <p class="text-sm text-slate-400 font-geist mb-4">Take the Digital Trust Scorecard to see where your organization stands.</p>
+            <a href="/scorecard" class="inline-flex items-center gap-2 ring-1 ring-white/20 text-sm font-medium text-neutral-900 font-geist bg-white rounded-full py-2 px-4">
+              Take the Scorecard
+              <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
             </a>
           </div>
         </div>
@@ -80,165 +78,151 @@ const related = allPosts.filter(p => p.id !== post.id).slice(0, 3);
 
       <!-- Sidebar -->
       <aside class="space-y-6">
-        <div class="card p-5">
-          <h3 class="font-semibold text-ghost mb-4 text-sm">More Articles</h3>
+        <div class="rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-5">
+          <h3 class="font-semibold text-white font-geist mb-4 text-sm">More Articles</h3>
           <div class="space-y-4">
             {related.map(rel => (
               <a href={`/frameworks/${rel.id}`} class="block group">
-                <div class="text-xs font-mono text-mint mb-1">{rel.data.category}</div>
-                <div class="text-sm text-ghost/80 group-hover:text-mint transition-colors leading-snug">
+                <div class="text-xs text-white/50 font-geist mb-1">{rel.data.category}</div>
+                <div class="text-sm text-white/80 group-hover:text-white transition-colors leading-snug font-geist">
                   {rel.data.title}
                 </div>
-                <div class="text-xs text-muted mt-1">{rel.data.readTime}</div>
+                <div class="text-xs text-slate-500 font-geist mt-1">{rel.data.readTime}</div>
               </a>
             ))}
           </div>
         </div>
 
-        <div class="card p-5">
-          <h3 class="font-semibold text-ghost mb-3 text-sm">Trust Map</h3>
-          <p class="text-xs text-muted mb-4">Explore the providers implementing these standards.</p>
-          <a href="/infrastructure" class="block text-xs text-mint hover:underline">View Infrastructure Map →</a>
+        <div class="rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-5">
+          <h3 class="font-semibold text-white font-geist mb-3 text-sm">Trust Map</h3>
+          <p class="text-xs text-slate-400 font-geist mb-4">Explore the providers implementing these standards.</p>
+          <a href="/infrastructure" class="flex items-center gap-1.5 text-xs text-white/70 hover:text-white transition font-geist">
+            View Infrastructure Map <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+          </a>
         </div>
       </aside>
     </div>
 
-    <!-- Related articles -->
     {related.length > 0 && (
-      <section class="mt-16 pt-8 border-t border-border">
-        <h2 class="text-xl font-bold text-ghost mb-6">Related Articles</h2>
+      <section class="mt-16 pt-8 border-t border-white/5">
+        <h2 class="text-xl font-semibold text-white font-geist mb-6">Related Articles</h2>
         <div class="grid sm:grid-cols-3 gap-4">
           {related.map(rel => (
-            <a href={`/frameworks/${rel.id}`} class="card p-5 hover:border-mint/40 hover:bg-mint/5 transition-all group">
-              <div class="text-xs font-mono text-mint mb-2">{rel.data.category}</div>
-              <h3 class="font-semibold text-ghost group-hover:text-mint transition-colors text-sm mb-2">
+            <a href={`/frameworks/${rel.id}`} class="group rounded-2xl bg-slate-900/50 ring-1 ring-white/10 hover:ring-white/20 hover:bg-white/5 backdrop-blur-md transition-all p-5">
+              <div class="text-xs text-white/50 font-geist mb-2">{rel.data.category}</div>
+              <h3 class="font-semibold text-white group-hover:text-blue-200 transition-colors font-geist text-sm mb-2">
                 {rel.data.title}
               </h3>
-              <p class="text-xs text-muted line-clamp-2">{rel.data.description}</p>
+              <p class="text-xs text-slate-400 font-geist line-clamp-2">{rel.data.description}</p>
             </a>
           ))}
         </div>
       </section>
     )}
   </div>
-</BaseLayout>
+</InnerLayout>
 
 <style>
   .prose-content :global(h2) {
+    font-family: 'Geist', sans-serif;
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #F8FAFC;
+    font-weight: 600;
+    color: #f1f5f9;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
     padding-bottom: 0.5rem;
   }
-
   .prose-content :global(h3) {
+    font-family: 'Geist', sans-serif;
     font-size: 1.125rem;
     font-weight: 600;
-    color: #F8FAFC;
+    color: #f1f5f9;
     margin-top: 1.75rem;
     margin-bottom: 0.75rem;
   }
-
   .prose-content :global(p) {
-    color: rgba(248, 250, 252, 0.7);
+    font-family: 'Geist', sans-serif;
+    color: rgba(148, 163, 184, 1);
     line-height: 1.8;
     margin-bottom: 1rem;
   }
-
   .prose-content :global(ul), .prose-content :global(ol) {
-    color: rgba(248, 250, 252, 0.7);
+    font-family: 'Geist', sans-serif;
+    color: rgba(148, 163, 184, 1);
     padding-left: 1.5rem;
     margin-bottom: 1rem;
-    space-y: 0.5rem;
   }
-
   .prose-content :global(li) {
     margin-bottom: 0.4rem;
     line-height: 1.7;
   }
-
   .prose-content :global(code) {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 0.875em;
-    background: #1E293B;
-    border: 1px solid #334155;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     padding: 0.15em 0.4em;
     border-radius: 4px;
-    color: #A2FFD6;
+    color: #93c5fd;
   }
-
   .prose-content :global(pre) {
-    background: #1E293B;
-    border: 1px solid #334155;
-    border-radius: 0.5rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0.75rem;
     padding: 1.25rem;
     overflow-x: auto;
     margin: 1.5rem 0;
   }
-
   .prose-content :global(pre code) {
     background: none;
     border: none;
     padding: 0;
-    color: #A2FFD6;
+    color: #93c5fd;
     font-size: 0.85rem;
   }
-
   .prose-content :global(blockquote) {
-    border-left: 3px solid #A2FFD6;
+    border-left: 2px solid rgba(255,255,255,0.2);
     padding-left: 1rem;
-    color: rgba(248, 250, 252, 0.6);
+    color: rgba(148, 163, 184, 0.8);
     font-style: italic;
     margin: 1.5rem 0;
   }
-
   .prose-content :global(table) {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
     font-size: 0.875rem;
   }
-
   .prose-content :global(th) {
-    background: #1E293B;
-    color: #A2FFD6;
+    background: rgba(255,255,255,0.05);
+    color: #f1f5f9;
+    font-family: 'Geist', sans-serif;
     font-weight: 600;
     padding: 0.75rem 1rem;
     text-align: left;
-    border: 1px solid #334155;
-    font-family: 'JetBrains Mono', monospace;
+    border: 1px solid rgba(255,255,255,0.08);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-
   .prose-content :global(td) {
     padding: 0.75rem 1rem;
-    border: 1px solid #334155;
-    color: rgba(248, 250, 252, 0.7);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: rgba(148, 163, 184, 1);
+    font-family: 'Geist', sans-serif;
   }
-
-  .prose-content :global(tr:nth-child(even) td) {
-    background: rgba(30, 41, 59, 0.3);
-  }
-
   .prose-content :global(a) {
-    color: #A2FFD6;
+    color: #93c5fd;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-
   .prose-content :global(strong) {
-    color: #F8FAFC;
+    color: #f1f5f9;
     font-weight: 600;
   }
-
   .prose-content :global(hr) {
-    border-color: #334155;
+    border-color: rgba(255,255,255,0.08);
     margin: 2rem 0;
   }
 </style>

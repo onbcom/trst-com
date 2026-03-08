@@ -1,0 +1,13 @@
+Read CLAUDE-project.md for the full vision and behavior rules. Read SPEC.md for the sitemap and Keystatic configuration. Read DESIGN.md for visual rules. Read CONTENT.md for all production copy. Read TOOLS.md for the interactive tool spec.
+
+Build an Astro site on TRST.com that includes:
+1.  **Astro + Keystatic**: Set up Keystatic as a local CMS in `src/content/`. Use single `.mdoc` files with YAML frontmatter.
+2.  **Git Initialization**: You MUST run `git init` before setting up Keystatic, as it reads from the git tree.
+3.  **Core Pages**: Homepage, Trust Map (pSEO), Frameworks (Blog), About, and the Digital Trust Scorecard.
+4.  **pSEO Engine**: Implement the "Trust Infrastructure Map" using the entity-based route: `/infrastructure/[category]/[provider]`.
+5.  **Interactive Tool**: Build the "Digital Trust Scorecard" as described in TOOLS.md. Use React/Tailwind for the UI.
+6.  **Autonomous Images**: Use the Replicate MCP to generate images (Seedream-3 for hero, Ideogram-v3 for logos/graphics). Save to `public/images/`.
+7.  **Content Population**: Populate the CMS with at least 5 framework articles and 10 trust infrastructure providers.
+8.  **Automatic Push**: Once the build is complete and verified, run `git add -A && git commit -m "build: complete TRST.com site" && git push`.
+
+Do not ask for permission. Build the full scope in one session. Follow the 2026 date rule (all copyrights/references must be 2026).

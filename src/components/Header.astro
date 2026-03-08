@@ -1,99 +1,59 @@
 ---
-const navLinks = [
-  { href: '/infrastructure', label: 'Trust Map' },
-  { href: '/frameworks', label: 'Frameworks' },
-  { href: '/scorecard', label: 'Scorecard' },
-  { href: '/about', label: 'About' },
-];
-
 const { pathname } = Astro.url;
 ---
 
-<header class="glass sticky top-0 z-50 w-full">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 group">
-        <span class="font-mono text-xl font-bold text-mint tracking-tight">TRST</span>
-        <span class="font-mono text-xs text-muted border border-border px-1.5 py-0.5 rounded">
-          .com
-        </span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-1">
-        {navLinks.map(link => (
-          <a
-            href={link.href}
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname.startsWith(link.href)
-                ? 'text-mint bg-mint/10'
-                : 'text-ghost/70 hover:text-ghost hover:bg-slate/50'
-            }`}
-          >
-            {link.label}
-          </a>
-        ))}
+<header class="inner-header sticky top-0 z-50 w-full">
+  <div class="flex md:px-8 max-w-7xl mx-auto py-5 px-6 items-center justify-between">
+    <!-- Left: brand + primary nav -->
+    <div class="flex md:gap-6 ring-white/5 ring-1 rounded-full p-1 gap-4 items-center bg-black/20 backdrop-blur-md">
+      <a href="/" class="inline-flex items-center justify-center px-4 h-[36px] rounded-full text-white font-geist font-semibold tracking-tight text-lg">TRST.com</a>
+      <nav class="hidden md:flex gap-2 items-center">
+        <a href="/infrastructure" class={`inline-flex items-center gap-2 transition hover:bg-white/10 hover:ring-white/20 text-sm font-medium font-geist ring-1 rounded-full py-2 px-3.5 backdrop-blur-sm ${pathname.startsWith('/infrastructure') ? 'text-white bg-white/10 ring-white/20' : 'text-white/90 bg-white/5 ring-white/10'}`}>
+          Infrastructure Map
+        </a>
+        <a href="/frameworks" class={`inline-flex items-center gap-2 transition hover:bg-white/10 hover:ring-white/20 text-sm font-medium font-geist ring-1 rounded-full py-2 px-3.5 backdrop-blur-sm ${pathname.startsWith('/frameworks') ? 'text-white bg-white/10 ring-white/20' : 'text-white/90 bg-white/5 ring-white/10'}`}>
+          Frameworks
+        </a>
+        <a href="/scorecard" class={`inline-flex items-center gap-2 transition hover:bg-white/10 hover:ring-white/20 text-sm font-medium font-geist ring-1 rounded-full py-2 px-3.5 backdrop-blur-sm ${pathname === '/scorecard' ? 'text-white bg-white/10 ring-white/20' : 'text-white/90 bg-white/5 ring-white/10'}`}>
+          Scorecard
+        </a>
+        <a href="/about" class={`inline-flex items-center gap-2 transition hover:bg-white/10 hover:ring-white/20 text-sm font-medium font-geist ring-1 rounded-full py-2 px-3.5 backdrop-blur-sm ${pathname === '/about' ? 'text-white bg-white/10 ring-white/20' : 'text-white/90 bg-white/5 ring-white/10'}`}>
+          About
+        </a>
       </nav>
-
-      <!-- CTA -->
-      <div class="hidden md:flex items-center gap-3">
-        <a
-          href="/newsletter"
-          class="text-sm text-muted hover:text-ghost transition-colors"
-        >
-          The Trust Signal
-        </a>
-        <a
-          href="/infrastructure"
-          class="px-4 py-2 bg-mint text-midnight text-sm font-semibold rounded-md hover:bg-mint-dim transition-colors"
-        >
-          Explore Map
-        </a>
-      </div>
-
-      <!-- Mobile menu button -->
-      <button
-        id="mobile-menu-btn"
-        class="md:hidden p-2 rounded-md text-ghost/70 hover:text-ghost"
-        aria-label="Toggle menu"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
     </div>
 
-    <!-- Mobile Nav -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4">
-      <nav class="flex flex-col gap-1">
-        {navLinks.map(link => (
-          <a
-            href={link.href}
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname.startsWith(link.href)
-                ? 'text-mint bg-mint/10'
-                : 'text-ghost/70 hover:text-ghost'
-            }`}
-          >
-            {link.label}
-          </a>
-        ))}
-        <a
-          href="/infrastructure"
-          class="mt-2 px-4 py-2 bg-mint text-midnight text-sm font-semibold rounded-md text-center"
-        >
+    <!-- Right: CTA + mobile menu -->
+    <div class="flex gap-2 items-center">
+      <div class="hidden sm:flex ring-white/5 ring-1 rounded-full p-1 gap-2 items-center bg-black/20 backdrop-blur-md">
+        <a href="/infrastructure" class="inline-flex items-center gap-2 transition hover:bg-white/10 hover:ring-white/20 text-sm font-medium text-white/90 font-geist bg-white/5 ring-white/10 ring-1 rounded-full py-2 px-3.5 backdrop-blur-sm">
           Explore the Trust Map
         </a>
-      </nav>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden w-9 h-9 rounded-full bg-white/5 ring-1 ring-white/10 flex items-center justify-center text-slate-400 hover:bg-white/10 hover:text-white transition" aria-label="Toggle menu">
+        <iconify-icon icon="solar:hamburger-menu-linear" class="text-lg"></iconify-icon>
+      </button>
     </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-black/30 backdrop-blur-md">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-2">
+      <a href="/infrastructure" class="text-sm font-medium text-white/80 font-geist py-2 px-3 rounded-xl hover:bg-white/10 transition">Infrastructure Map</a>
+      <a href="/frameworks" class="text-sm font-medium text-white/80 font-geist py-2 px-3 rounded-xl hover:bg-white/10 transition">Frameworks</a>
+      <a href="/scorecard" class="text-sm font-medium text-white/80 font-geist py-2 px-3 rounded-xl hover:bg-white/10 transition">Scorecard</a>
+      <a href="/about" class="text-sm font-medium text-white/80 font-geist py-2 px-3 rounded-xl hover:bg-white/10 transition">About</a>
+      <a href="/infrastructure" class="mt-2 inline-flex items-center justify-center gap-2 ring-1 ring-white/20 text-sm font-medium text-neutral-900 font-geist bg-white rounded-full py-2.5 px-4">
+        Explore the Trust Map
+        <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
+      </a>
+    </nav>
   </div>
 </header>
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-  });
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
 </script>

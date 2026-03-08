@@ -1,27 +1,29 @@
 ---
-import BaseLayout from '../components/BaseLayout.astro';
+import InnerLayout from '../components/InnerLayout.astro';
 ---
 
-<BaseLayout
+<InnerLayout
   title="The Trust Signal Newsletter | TRST.com"
   description="Subscribe to The Trust Signal—weekly digital trust intelligence covering identity protocols, infrastructure updates, and AI agent standards for practitioners."
 >
   <!-- Hero -->
-  <section class="border-b border-border py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-mint/30 bg-mint/5">
-        <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
-        <span class="font-mono text-xs text-mint">Weekly · Free · Unsubscribe anytime</span>
+  <section class="relative overflow-hidden py-24 bg-slate-950">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        Weekly · Free · Unsubscribe anytime
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold mb-6">
+      <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight font-geist text-white mb-6">
         The Trust Signal
       </h1>
-      <p class="text-lg text-ghost/70 max-w-2xl mx-auto mb-10">
+      <p class="text-lg text-white/70 font-geist max-w-2xl mx-auto mb-10 leading-relaxed">
         Weekly digital trust intelligence. Protocol updates, infrastructure analysis,
         and the emerging standards shaping identity, security, and AI accountability in 2026.
       </p>
 
-      <!-- Signup Form -->
       <div class="max-w-md mx-auto">
         <form id="signup-form" class="flex gap-2">
           <input
@@ -29,20 +31,19 @@ import BaseLayout from '../components/BaseLayout.astro';
             id="email-input"
             placeholder="you@yourcompany.com"
             required
-            class="flex-1 px-4 py-3 bg-slate border border-border rounded-lg text-ghost placeholder-muted focus:outline-none focus:border-mint transition-colors text-sm"
+            class="flex-1 px-4 py-3 bg-white/5 ring-1 ring-white/10 rounded-full text-white placeholder-slate-500 focus:outline-none focus:ring-white/20 transition text-sm font-geist"
           />
           <button
             type="submit"
-            class="px-5 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors text-sm shrink-0"
+            class="inline-flex items-center gap-2 ring-1 ring-white/20 transition hover:bg-neutral-100 text-sm font-medium text-neutral-900 font-geist bg-white rounded-full py-2.5 px-5 shrink-0"
           >
-            Subscribe →
+            Subscribe
           </button>
         </form>
-        <p class="text-xs text-muted mt-3">
+        <p class="text-xs text-slate-500 font-geist mt-3">
           No spam. GDPR-v3 compliant. Unsubscribe in one click.
         </p>
-        <!-- Success message -->
-        <div id="success-msg" class="hidden mt-4 p-4 rounded-lg border border-mint/30 bg-mint/10 text-mint text-sm">
+        <div id="success-msg" class="hidden mt-4 p-4 rounded-2xl ring-1 ring-emerald-400/30 bg-emerald-400/10 text-emerald-400 font-geist text-sm">
           ✓ You're subscribed. Welcome to The Trust Signal.
         </div>
       </div>
@@ -50,66 +51,47 @@ import BaseLayout from '../components/BaseLayout.astro';
   </section>
 
   <!-- What you'll get -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="text-center mb-12">
-      <p class="font-mono text-xs text-mint uppercase tracking-widest mb-3">What You'll Receive</p>
-      <h2 class="text-3xl font-bold">Weekly Trust Intelligence</h2>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[
-        {
-          icon: '📡',
-          title: 'Protocol Updates',
-          desc: 'Breaking developments in W3C DIDs, OIDC, FIDO2, and emerging standards before they reach the mainstream.',
-        },
-        {
-          icon: '🗺️',
-          title: 'Infrastructure Analysis',
-          desc: 'Deep dives on trust infrastructure providers—new entrants, funding rounds, and technology shifts.',
-        },
-        {
-          icon: '🤖',
-          title: 'AI Trust Frontier',
-          desc: 'The latest in AI agent identity, model accountability, and autonomous system governance.',
-        },
-        {
-          icon: '⚖️',
-          title: 'Regulatory Radar',
-          desc: 'GDPR-v3, CCPA-2026, and emerging AI regulation—translated from legalese to implementation guidance.',
-        },
-        {
-          icon: '🔑',
-          title: 'Developer Spotlight',
-          desc: 'Open-source tools, SDKs, and reference implementations worth adding to your trust stack.',
-        },
-        {
-          icon: '📊',
-          title: 'Trust Benchmark Data',
-          desc: 'Quarterly Trust Score updates and comparative analysis across infrastructure categories.',
-        },
-      ].map(item => (
-        <div class="card p-6">
-          <div class="text-3xl mb-4">{item.icon}</div>
-          <h3 class="font-semibold text-ghost mb-2">{item.title}</h3>
-          <p class="text-sm text-muted leading-relaxed">{item.desc}</p>
+  <section class="relative bg-slate-950 py-20 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 ring-1 ring-white/10 font-geist mb-4 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.1s_both]">
+          <iconify-icon icon="solar:letter-linear" class="text-sm text-blue-400"></iconify-icon>
+          What You'll Receive
         </div>
-      ))}
+        <h2 class="text-3xl font-semibold tracking-tight font-geist text-white animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.15s_both]">Weekly Trust Intelligence</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { icon: 'solar:rss-linear', title: 'Protocol Updates', desc: 'Breaking developments in W3C DIDs, OIDC, FIDO2, and emerging standards before they reach the mainstream.', color: 'text-blue-400' },
+          { icon: 'solar:map-point-linear', title: 'Infrastructure Analysis', desc: 'Deep dives on trust infrastructure providers—new entrants, funding rounds, and technology shifts.', color: 'text-purple-400' },
+          { icon: 'solar:robot-linear', title: 'AI Trust Frontier', desc: 'The latest in AI agent identity, model accountability, and autonomous system governance.', color: 'text-orange-400' },
+          { icon: 'solar:scale-linear', title: 'Regulatory Radar', desc: 'GDPR-v3, CCPA-2026, and emerging AI regulation—translated from legalese to implementation guidance.', color: 'text-emerald-400' },
+          { icon: 'solar:code-square-linear', title: 'Developer Spotlight', desc: 'Open-source tools, SDKs, and reference implementations worth adding to your trust stack.', color: 'text-blue-400' },
+          { icon: 'solar:graph-up-linear', title: 'Trust Benchmark Data', desc: 'Quarterly Trust Score updates and comparative analysis across infrastructure categories.', color: 'text-purple-400' },
+        ].map(item => (
+          <div class="rounded-2xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-6 animate-on-scroll [animation:fadeSlideIn_1s_ease-out_0.1s_both]">
+            <iconify-icon icon={item.icon} class={`text-2xl ${item.color} mb-4 block`}></iconify-icon>
+            <h3 class="font-semibold text-white font-geist mb-2">{item.title}</h3>
+            <p class="text-sm text-slate-400 font-geist leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
   <!-- 2026 Trust Report -->
-  <section class="border-t border-border bg-slate/20 py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative bg-slate-950 py-20 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-6 md:px-8">
       <div class="grid sm:grid-cols-2 gap-10 items-center">
         <div>
-          <span class="font-mono text-xs text-mint uppercase tracking-widest">Free with subscription</span>
-          <h2 class="text-3xl font-bold mt-3 mb-4">The 2026 Trust Infrastructure Report</h2>
-          <p class="text-ghost/70 leading-relaxed mb-6">
+          <div class="text-xs font-medium text-white/60 font-geist uppercase tracking-wider mb-3">Free with subscription</div>
+          <h2 class="text-3xl font-semibold tracking-tight font-geist text-white mt-3 mb-4">The 2026 Trust Infrastructure Report</h2>
+          <p class="text-white/70 font-geist leading-relaxed mb-6">
             A comprehensive analysis of the digital trust landscape: market maps, technology assessments,
             protocol maturity scores, and predictions for the infrastructure shifts that will define
             identity and security through 2028.
           </p>
-          <ul class="space-y-2 text-sm text-ghost/70">
+          <ul class="space-y-3 text-sm text-white/70 font-geist">
             {[
               '56 pages of trust infrastructure analysis',
               'Comparative Trust Scores for 40+ providers',
@@ -117,32 +99,33 @@ import BaseLayout from '../components/BaseLayout.astro';
               'Regulatory compliance roadmap for 2026-2028',
             ].map(item => (
               <li class="flex items-center gap-2">
-                <span class="text-mint">✓</span>
+                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400 shrink-0"></iconify-icon>
                 {item}
               </li>
             ))}
           </ul>
         </div>
-        <div class="card p-8 border-mint/20 bg-mint/5 text-center">
-          <div class="font-mono text-xs text-mint mb-4">GET THE REPORT</div>
-          <div class="text-5xl mb-4">📋</div>
-          <p class="text-ghost/70 text-sm mb-6">Delivered immediately on signup</p>
+        <div class="rounded-3xl bg-slate-900/50 ring-1 ring-white/10 backdrop-blur-md p-8 text-center">
+          <div class="text-xs font-medium text-white/60 font-geist uppercase tracking-wider mb-4">Get the Report</div>
+          <iconify-icon icon="solar:document-text-linear" class="text-5xl text-white/30 mb-4 block mx-auto"></iconify-icon>
+          <p class="text-white/70 font-geist text-sm mb-6">Delivered immediately on signup</p>
           <form id="report-form" class="space-y-3">
             <input
               type="email"
               id="report-email"
               placeholder="your@email.com"
               required
-              class="w-full px-4 py-3 bg-midnight border border-border rounded-lg text-ghost placeholder-muted focus:outline-none focus:border-mint transition-colors text-sm"
+              class="w-full px-4 py-3 bg-white/5 ring-1 ring-white/10 rounded-full text-white placeholder-slate-500 focus:outline-none focus:ring-white/20 transition text-sm font-geist"
             />
             <button
               type="submit"
-              class="w-full px-4 py-3 bg-mint text-midnight font-semibold rounded-lg hover:bg-mint-dim transition-colors text-sm"
+              class="w-full inline-flex items-center justify-center gap-2 ring-1 ring-white/20 transition hover:bg-neutral-100 text-sm font-medium text-neutral-900 font-geist bg-white rounded-full py-2.5 px-5"
             >
-              Get Free Report →
+              Get Free Report
+              <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
             </button>
           </form>
-          <div id="report-success" class="hidden mt-3 text-mint text-sm">
+          <div id="report-success" class="hidden mt-3 text-emerald-400 font-geist text-sm">
             ✓ Check your inbox. Report is on its way.
           </div>
         </div>
@@ -150,18 +133,18 @@ import BaseLayout from '../components/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Social proof placeholder -->
-  <section class="border-t border-border py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-muted text-sm mb-8">Read by trust architects at</p>
+  <!-- Social proof -->
+  <section class="relative bg-slate-950 py-16 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-6 md:px-8 text-center">
+      <p class="text-slate-500 font-geist text-sm mb-8">Read by trust architects at</p>
       <div class="flex flex-wrap gap-8 justify-center items-center opacity-40">
         {['Cloudflare', 'Okta', 'Anthropic', 'Stripe', 'Coinbase', 'NHS Digital'].map(co => (
-          <span class="font-mono text-sm text-ghost">{co}</span>
+          <span class="font-geist text-sm text-white">{co}</span>
         ))}
       </div>
     </div>
   </section>
-</BaseLayout>
+</InnerLayout>
 
 <script>
   function handleForm(formId: string, successId: string) {
